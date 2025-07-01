@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="application-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="university-logo">
+          <img src="/assets/lsrc.jpg" alt="College Logo" />
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="form-section">
+          <div class="form-title-container">
+            <h2 class="form-title">APPLICATION FORM</h2>
+          </div>
+
+          <div class="faculty-header">
+            <!-- <p>Fields with <span class="required">*</span> are mandatory</p> -->
+          </div>
+
+          <form id="applicationForm" class="application-form">
+            <!-- Personal Information -->
+            <div class="form-group-container">
+              <div class="section-header">Personal Information</div>
+              <div class="form-content">
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>First Name<span class="required">*</span></label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      placeholder="First Name"
+                      required
+                    />
+                    <span class="error-text">First Name is required</span>
+                  </div>
+                  <div class="form-field">
+                    <label>Middle Name</label>
+                    <input
+                      type="text"
+                      id="middleName"
+                      placeholder="Middle Name"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Last Name<span class="required">*</span></label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Email<span class="required">*</span></label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Mobile Number<span class="required">*</span></label>
+                    <input
+                      type="tel"
+                      id="mobile"
+                      placeholder="Mobile Number"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Address<span class="required">*</span></label>
+                    <input
+                      type="text"
+                      id="address"
+                      placeholder="Address"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Date of Birth<span class="required">*</span></label>
+                    <input type="date" id="dob" required />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Qualification Information -->
+            <div class="form-group-container">
+              <div class="section-header">Qualification Information</div>
+              <div class="form-content">
+                <div id="qualificationsList">
+                  <!-- Qualifications will be added dynamically -->
+                </div>
+                <button type="button" class="add-qualification-btn" onclick="addQualification()">
+                  Add Qualification
+                </button>
+              </div>
+            </div>
+
+            <!-- Work Experience Information -->
+            <div class="form-group-container">
+              <div class="section-header">Work Experience Information</div>
+              <div class="form-content">
+                <div class="experience-toggle">
+                  <div class="radio-group">
+                    <label class="radio-label">
+                      <input type="radio" name="experienceType" value="fresher" onchange="toggleExperienceType()">
+                      <span class="radio-custom"></span>
+                      Fresher
+                    </label>
+                    <label class="radio-label">
+                      <input type="radio" name="experienceType" value="experienced" checked onchange="toggleExperienceType()">
+                      <span class="radio-custom"></span>
+                      Experienced
+                    </label>
+                  </div>
+                </div>
+
+                <div id="experienceSection">
+                  <div id="experiencesList">
+                    <!-- Work experiences will be added dynamically -->
+                  </div>
+                  <button type="button" class="add-experience-btn" onclick="addWorkExperience()">
+                    Add Work Experience
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-group-container">
+              <div class="section-header">Additional Information</div>
+              <div class="form-content">
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Mother Tongue</label>
+                    <input
+                      type="text"
+                      id="motherTongue"
+                      placeholder="Mother Tongue"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Other Language</label>
+                    <input
+                      type="text"
+                      id="otherLanguage"
+                      placeholder="Other Language"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>English Typing Speed Per Minute</label>
+                    <input
+                      type="number"
+                      id="englishTypingSpeed"
+                      placeholder="40"
+                      min="0"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label>Marathi Typing Speed Per Minute</label>
+                    <input
+                      type="number"
+                      id="marathiTypingSpeed"
+                      placeholder="40"
+                      min="0"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label>Joining Date If Selected:</label>
+                    <input type="date" id="joiningDate" />
+                  </div>
+                  <div class="form-field">
+                    <label>Expected Salary</label>
+                    <input
+                      type="text"
+                      id="expectedSalary"
+                      placeholder="Expected Salary"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field full-width">
+                    <label>Comments</label>
+                    <textarea
+                      id="comments"
+                      placeholder="Additional Comments"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload CV -->
+            <div class="form-group-container">
+              <div class="section-header">Upload CV</div>
+              <div class="form-content resume-section">
+                <div class="file-upload-container">
+                  <input
+                    type="file"
+                    id="cvUpload"
+                    accept=".pdf"
+                    onchange="handleFileUpload(this)"
+                  />
+                  <label for="cvUpload" class="upload-container">
+                    <div class="upload-icon">📄</div>
+                    <span class="upload-text" id="uploadText">Choose a file</span>
+                  </label>
+                  <button type="button" class="browse-btn" onclick="document.getElementById('cvUpload').click()">
+                    Browse
+                  </button>
+                </div>
+                <p class="upload-note">
+                  *Upload CV - Maximum File Size is 5MB (PDF ONLY)
+                </p>
+                <p id="fileError" class="error-message" style="display: none"></p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit-section">
+              <button type="submit" class="submit-btn">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="script2.js"></script>
+  </body>
+</html>
