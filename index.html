@@ -188,9 +188,40 @@
                   </div>
                 </div>
 
+                 <div class="form-row">
+                  <div class="form-field">
+                    <label>Caste/Sub-Caste<span class="required">*</span></label>
+                    <input
+                      type="text"
+                      id="caste"
+                      placeholder="Enter Caste/Sub-Caste"
+                      required
+                    />
+                  </div>
+                   <div class="form-field">
+                    <label>Aadhar No <span class="required">*</span></label>
+                    <input
+                      type="tel"
+                      id="aadhar"
+                      placeholder="Enter Aadhar No "
+                      required
+                    />
+                  </div>
+                   <div class="form-field">
+                    <label>Pan No<span class="required">*</span></label>
+                    <input
+                      type="text"
+                      id="pan"
+                      placeholder="Enter PAn NO"
+                      required
+                    />
+                  </div>
+                  
+                </div>
+
                 <div class="location-contact-section">
                   <div class="location-section">
-                    <h4>Current Location:</h4>
+                    <h4>Address:</h4>
                     <div class="form-row">
                       <div class="form-field">
                         <label>State<span class="required">*</span></label>
@@ -204,6 +235,24 @@
                           type="text"
                           id="city"
                           placeholder="Enter City"
+                          required
+                        />
+                      </div>
+                       <div class="form-field">
+                        <label>Address<span class="required">*</span></label>
+                        <input
+                          type="text"
+                          id="Address"
+                          placeholder="Enter Address"
+                          required
+                        />
+                      </div>
+                        <div class="form-field">
+                        <label>PinCode<span class="required">*</span></label>
+                        <input
+                          type="tel"
+                          id="pinCode"
+                          placeholder="Enter PinCode"
                           required
                         />
                       </div>
@@ -418,59 +467,6 @@
                     <input type="hidden" id="setStatus" value="yes" />
                   </div>
 
-                  <div class="exam-group">
-                    <span class="exam-label">SLET</span>
-                    <div class="button-group">
-                      <button
-                        type="button"
-                        class="toggle-btn active"
-                        onclick="toggleExam('slet', 'yes')"
-                      >
-                        Yes
-                      </button>
-                      <button
-                        type="button"
-                        class="toggle-btn"
-                        onclick="toggleExam('slet', 'no')"
-                      >
-                        No
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      id="sletYear"
-                      placeholder="Enter Year"
-                      class="year-input"
-                    />
-                    <input type="hidden" id="sletStatus" value="yes" />
-                  </div>
-
-                  <div class="exam-group">
-                    <span class="exam-label">GATE</span>
-                    <div class="button-group">
-                      <button
-                        type="button"
-                        class="toggle-btn active"
-                        onclick="toggleExam('gate', 'yes')"
-                      >
-                        Yes
-                      </button>
-                      <button
-                        type="button"
-                        class="toggle-btn"
-                        onclick="toggleExam('gate', 'no')"
-                      >
-                        No
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      id="gateYear"
-                      placeholder="Enter Year"
-                      class="year-input"
-                    />
-                    <input type="hidden" id="gateStatus" value="yes" />
-                  </div>
                 </div>
               </div>
             </div>
@@ -579,6 +575,61 @@
                       >
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Awards -->
+            <div class="form-group-container">
+              <div class="section-header">
+                Awards
+              </div>
+              <div class="form-content">
+                <div class="form-row">
+                  <div class="form-field">
+                    <label
+                        >Title
+                        </label
+                      >
+                      <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter Title"
+                      />
+                    </div>
+                   <div class="form-field">
+                    <label
+                        >Organization Name
+                        </label
+                      >
+                      <input
+                        type="text"
+                        id="organizationName"
+                        placeholder="Enter Organization Name"
+                      />
+                    </div>
+                     <div class="form-field">
+                    <label
+                        >Nature of Award
+                        </label
+                      >
+                      <input
+                        type="text"
+                        id="Nature of Award"
+                        placeholder="Enter Nature of Award"
+                      />
+                    </div>
+                     <div class="form-field">
+                    <label
+                        >Organization  Recognition
+                        </label
+                      >
+                      <input
+                        type="text"
+                        id="organizationRecognition"
+                        placeholder="Enter Organization Recognition"
+                      />
+                    </div>  
                 </div>
               </div>
             </div>
