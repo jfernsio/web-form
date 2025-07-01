@@ -146,3 +146,70 @@ indianStates.forEach((state) => {
   option.textContent = state;
   stateSelect.appendChild(option);
 });
+
+ function addQualification() {
+    const container = document.getElementById("qualificationsContainer");
+    const items = container.querySelectorAll(".qualification-item");
+    const newIndex = items.length;
+
+    // Clone the first item
+    const newItem = items[0].cloneNode(true);
+
+    // Clear all input fields in the clone
+    newItem.querySelectorAll("input, select").forEach((el) => {
+      if (el.tagName.toLowerCase() === "select") {
+        el.selectedIndex = 0;
+      } else {
+        el.value = "";
+      }
+    });
+
+    // Update data-index and button onclick
+    newItem.setAttribute("data-index", newIndex);
+    newItem.querySelector(".remove-qualification-btn").setAttribute(
+      "onclick",
+      `removeQualification(${newIndex})`
+    );
+
+    container.appendChild(newItem);
+
+    updateRemoveButtons();
+  }
+
+  function removeQualification(index) {
+    const container = document.getElementById("qualificationsContainer");
+    const items = container.querySelectorAll(".qualification-item");
+
+    if (items.length > 1) {
+      items[index].remove();
+
+      // Re-index all remaining items
+      const updatedItems = container.querySelectorAll(".qualification-item");
+      updatedItems.forEach((item, idx) => {
+        item.setAttribute("data-index", idx);
+        item.querySelector(".remove-qualification-btn").setAttribute(
+          "onclick",
+          `removeQualification(${idx})`
+        );
+      });
+
+      updateRemoveButtons();
+    }
+  }
+
+  function updateRemoveButtons() {
+    const items = document.querySelectorAll(".qualification-item");
+    items.forEach((item, index) => {
+      const removeBtn = item.querySelector(".remove-qualification-btn");
+      if (items.length === 1) {
+        removeBtn.style.display = "none";
+      } else {
+        removeBtn.style.display = "block";
+      }
+    });
+  }
+
+  // Initial call on page load (optional)
+  window.onload = function () {
+    updateRemoveButtons();
+  };
