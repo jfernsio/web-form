@@ -8,39 +8,36 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleExperienceType(); // Initialize on load
 
   // Handle file upload validation
-  window.handleFileUpload = (input) => {
-    const file = input.files[0];
-    const fileError = document.getElementById("fileError");
-    const uploadText = document.getElementById("uploadText");
+ window.handleFileUpload = (input) => {
+  const file = input.files[0];
+  const fileError = document.getElementById("fileError");
+  const uploadText = document.getElementById("uploadText");
 
-    if (!file) return;
+  if (!file) return;
 
-    const allowedTypes = [
-      "application/pdf",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ];
-    const maxSize = 5 * 1024 * 1024; // 5MB
+  const allowedTypes = ["application/pdf"];
+  const maxSize = 5 * 1024 * 1024; // 5MB
 
-    if (!allowedTypes.includes(file.type)) {
-      fileError.textContent = "Only PDF, DOC, or DOCX files are allowed.";
-      fileError.style.display = "block";
-      input.value = "";
-      uploadText.textContent = "Choose a file";
-      return;
-    }
+  if (!allowedTypes.includes(file.type)) {
+    fileError.textContent = "Only PDF files are allowed.";
+    fileError.style.display = "block";
+    input.value = "";
+    uploadText.textContent = "Choose a file";
+    return;
+  }
 
-    if (file.size > maxSize) {
-      fileError.textContent = "File size must not exceed 5MB.";
-      fileError.style.display = "block";
-      input.value = "";
-      uploadText.textContent = "Choose a file";
-      return;
-    }
+  if (file.size > maxSize) {
+    fileError.textContent = "File size must not exceed 5MB.";
+    fileError.style.display = "block";
+    input.value = "";
+    uploadText.textContent = "Choose a file";
+    return;
+  }
 
-    fileError.style.display = "none";
-    uploadText.textContent = file.name;
-  };
+  fileError.style.display = "none";
+  uploadText.textContent = file.name;
+};
+
 
   // Add qualification section
   let qualificationCount = 0;
