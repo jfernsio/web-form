@@ -320,7 +320,7 @@
                       </div>
                       <div class="form-field">
                         <label
-                          >Degree Name<span class="required">*</span></label
+                          >Degree Name</label
                         >
                         <input
                           type="text"
@@ -778,6 +778,114 @@
                     <label>Letter Date</label>
                     <input type="date" id="letterDate" />
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Research Papers -->
+            <div class="form-group-container">
+              <div class="section-header">Research Papers</div>
+              <div class="form-content">
+                <div id="researchPapersContainer">
+                  <div class="research-paper-item" data-index="0">
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label
+                          >Scopus Indexed Publications</label
+                        >
+                        <input
+                          type="text"
+                          class="scopus-publications"
+                          placeholder="Enter number of publications"
+                         
+                        />
+                      </div>
+                      <div class="form-field">
+                        <label>Scopus ID</label>
+                        <input
+                          type="text"
+                          class="scopus-id"
+                          placeholder="Enter Scopus ID"
+                          
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label
+                          >Presented in Conference</label
+                        >
+                        <select class="conference-select" >
+                          <option value="">Select</option>                        
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div class="form-field">
+                        <label
+                          >Title Of The Paper</label
+                        >
+                        <input
+                          type="text"
+                          class="paper-title"
+                          placeholder="Enter journal title"
+                          
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label
+                          >Name of Journal</label
+                        >
+                        <input
+                          type="text"
+                          class="journal-name"
+                          placeholder="Enter journal name"
+                        
+                        />
+                      </div>
+                      <div class="form-field">
+                        <label
+                          >Year of Publication</label
+                        >
+                        <input type="date" class="publication-year"/>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label>Number of Approved Papers</label>
+                        <input
+                          type="number"
+                          class="approved-papers"
+                          placeholder="Enter number of approved papers"
+                        />
+                      </div>
+                      <div class="form-field remove-btn-container">
+                        <button
+                          type="button"
+                          class="remove-research-paper-btn"
+                          onclick="removeResearchPaper(0)"
+                          style="display: none"
+                        >
+                          ✕ Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="add-research-paper-section">
+                  <button
+                    type="button"
+                    class="add-research-paper-btn"
+                    onclick="addResearchPaper()"
+                  >
+                    + Add Research Paper
+                  </button>
                 </div>
               </div>
             </div>

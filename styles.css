@@ -494,6 +494,80 @@ body {
     box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
 }
 
+
+/* Research Paper Item Styles */
+.research-paper-item {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f8fafc;
+    position: relative;
+}
+
+.research-paper-item:last-child {
+    margin-bottom: 0;
+}
+
+.remove-research-paper-btn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remove-research-paper-btn:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.add-research-paper-section {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #d1d5db;
+}
+
+.add-research-paper-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.add-research-paper-btn:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+/* Error message styles for research papers */
+.research-paper-item .error-message {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+    display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header {

@@ -213,3 +213,68 @@ indianStates.forEach((state) => {
   window.onload = function () {
     updateRemoveButtons();
   };
+
+
+  function addResearchPaper() {
+    const container = document.getElementById("researchPapersContainer");
+    const items = container.querySelectorAll(".research-paper-item");
+    const newIndex = items.length;
+
+    // Clone the first item
+    const newItem = items[0].cloneNode(true);
+
+    // Clear all input and select fields in the clone
+    newItem.querySelectorAll("input, select").forEach((el) => {
+      if (el.tagName.toLowerCase() === "select") {
+        el.selectedIndex = 0;
+      } else {
+        el.value = "";
+      }
+    });
+
+    // Update data-index and remove button's onclick
+    newItem.setAttribute("data-index", newIndex);
+    newItem.querySelector(".remove-research-paper-btn").setAttribute(
+      "onclick",
+      `removeResearchPaper(${newIndex})`
+    );
+
+    container.appendChild(newItem);
+
+    updateResearchPaperRemoveButtons();
+  }
+
+  function removeResearchPaper(index) {
+    const container = document.getElementById("researchPapersContainer");
+    const items = container.querySelectorAll(".research-paper-item");
+
+    if (items.length > 1) {
+      items[index].remove();
+
+      // Re-index remaining items and update their remove buttons
+      const updatedItems = container.querySelectorAll(".research-paper-item");
+      updatedItems.forEach((item, idx) => {
+        item.setAttribute("data-index", idx);
+        item.querySelector(".remove-research-paper-btn").setAttribute(
+          "onclick",
+          `removeResearchPaper(${idx})`
+        );
+      });
+
+      updateResearchPaperRemoveButtons();
+    }
+  }
+
+  function updateResearchPaperRemoveButtons() {
+    const items = document.querySelectorAll(".research-paper-item");
+    items.forEach((item) => {
+      const removeBtn = item.querySelector(".remove-research-paper-btn");
+      removeBtn.style.display = items.length > 1 ? "block" : "none";
+    });
+  }
+
+  // On page load
+  window.onload = function () {
+    updateResearchPaperRemoveButtons();
+  };
+
