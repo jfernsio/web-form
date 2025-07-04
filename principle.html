@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application Form</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="application-container">
+    <div class="header">
+      <div class="university-info">
+        <img src="./assets/lsrc.jpg" alt="College Logo" />
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="form-section">
+        <div class="form-title-container">
+          <h2 class="form-title">APPLICATION FORM</h2>
+        </div>
+
+        <form id="applicationForm" class="application-form">
+          <!-- Post Applied For -->
+          <div class="form-group-container">
+            <div class="section-header">Post Applied For</div>
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Post Applied For<span class="required">*</span></label>
+                  <select id="postApplied" required>
+                    <option value="">Select Post Applied For</option>
+                    <option value="professor">Professor</option>
+                    <option value="director">Director</option>
+                    <option value="associate-professor">Associate Professor</option>
+                    <option value="assistant-professor">Assistant Professor</option>
+                    <option value="professor-of-practice">Professor of Practice</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Principal Eligibility Section -->
+          <div class="form-group-container" id="principalCriteria" style="display: none;">
+            <div class="section-header">Principal Eligibility</div>
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Total Years of Experience<span class="required">*</span></label>
+                  <input type="number" id="principalExperience" placeholder="Enter experience in years" onchange="validatePrincipalEligibility()" />
+                  <small id="experienceError" style="color: red; display: none;">Minimum 15 years of experience required for Principal post.</small>
+                </div>
+                <div class="form-field" id="researchUploadSection" style="display: none;">
+                  <label>Upload Research Document (Word only)<span class="required">*</span></label>
+                  <input type="file" id="researchUpload" accept=".doc,.docx" />
+                  <small class="upload-note">Upload required if experience ≥ 110%</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Info -->
+          <div class="form-group-container">
+            <div class="section-header">Personal Information</div>
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Title<span class="required">*</span></label>
+                  <select id="title" required>
+                    <option value="">Select</option>
+                    <option value="dr">Dr.</option>
+                    <option value="mr">Mr.</option>
+                    <option value="ms">Ms.</option>
+                    <option value="mrs">Mrs.</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label>First Name<span class="required">*</span></label>
+                  <input type="text" id="firstName" required />
+                </div>
+                <div class="form-field">
+                  <label>Last Name<span class="required">*</span></label>
+                  <input type="text" id="lastName" required />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ph.D. Section -->
+          <div class="form-group-container" id="phdSection">
+            <div class="section-header">Ph.D.</div>
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Status<span class="required">*</span></label>
+                  <select id="phdStatus" required>
+                    <option value="">Select</option>
+                    <option value="completed">Completed</option>
+                    <option value="pursuing">Pursuing</option>
+                    <option value="thesis-submitted">Thesis Submitted</option>
+                    <option value="not-applicable">Not Applicable</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label>University / Institute<span class="required">*</span></label>
+                  <input type="text" id="phdUniversity" />
+                </div>
+                <div class="form-field">
+                  <label>Year of Passing<span class="required">*</span></label>
+                  <input type="text" id="phdYear" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resume Upload -->
+          <div class="form-group-container">
+            <div class="section-header">Resume Upload</div>
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field">
+                  <input type="file" id="resumeUpload" accept=".pdf" />
+                  <label for="resumeUpload">Upload Resume (PDF only, max 5MB)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Declaration -->
+          <div class="form-group-container">
+            <div class="section-header">Declaration</div>
+            <div class="form-content">
+              <label>
+                <input type="checkbox" id="declaration" required />
+                I confirm that the information provided is true to my knowledge.
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-section">
+            <button type="submit" class="submit-btn">✓ SUBMIT APPLICATION</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const postSelect = document.getElementById('postApplied');
+    const principalCriteria = document.getElementById('principalCriteria');
+    const phdSection = document.getElementById('phdSection');
+    const researchSection = document.getElementById('researchUploadSection');
+    const experienceField = document.getElementById('principalExperience');
+    const experienceError = document.getElementById('experienceError');
+
+    postSelect.addEventListener('change', () => {
+      const selectedPost = postSelect.value;
+
+      if (selectedPost === 'associate-professor' || selectedPost === 'professor') {
+        principalCriteria.style.display = 'block';
+      } else {
+        principalCriteria.style.display = 'none';
+        researchSection.style.display = 'none';
+        experienceError.style.display = 'none';
+      }
+
+      // Hide PhD section only for Professor of Practice
+      if (selectedPost === 'professor-of-practice') {
+        phdSection.style.display = 'none';
+      } else {
+        phdSection.style.display = 'block';
+      }
+    });
+
+    function validatePrincipalEligibility() {
+      const experience = parseFloat(experienceField.value);
+      if (experience < 15) {
+        experienceError.style.display = 'block';
+        researchSection.style.display = 'none';
+      } else {
+        experienceError.style.display = 'none';
+        if (experience >= 16.5) {
+          researchSection.style.display = 'block';
+        } else {
+          researchSection.style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
