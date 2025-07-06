@@ -494,6 +494,34 @@ body {
     box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
 }
 
+/* Experience Item Styles */
+.remove-btn-container {
+     display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.remove-experience-btn {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remove-experience-btn:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+ 
 
 /* Research Paper Item Styles */
 .research-paper-item {

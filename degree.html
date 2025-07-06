@@ -13,12 +13,6 @@
         <div class="university-info">
           <img src="./assets/lsrc.jpg" alt="College Logo" />
         </div>
-        <!-- <div class="university-info">
-                <h1>LS RAHEJA</h1>
-                <h2>COLLEGE OF ARTS AND COMMERCE</h2>
-                <p>(Affiliated to University of Mumbai)</p>
-                <p>NAAC Accredited | Category 'A' Grade</p>
-            </div> -->
       </div>
 
       <div class="main-content">
@@ -319,9 +313,7 @@
                         </div>
                       </div>
                       <div class="form-field">
-                        <label
-                          >Degree Name</label
-                        >
+                        <label>Degree Name</label>
                         <input
                           type="text"
                           class="degree-name"
@@ -375,6 +367,14 @@
                         >
 
                         <input type="date" id="fromDate" />
+                      </div>
+                       <div class="form-field">
+                        <label>Percentage</label>
+                        <input
+                          type="tel"
+                          class="percentage"
+                          placeholder="Enter Percentage"
+                        />
                       </div>
                     </div>
 
@@ -589,108 +589,94 @@
 
             <!-- Work Experience -->
             <div class="form-group-container">
-              <div class="section-header">
-                Work Experience (Start from present job)
-              </div>
+              <div class="section-header">Work Experience</div>
               <div class="form-content">
-                <div class="button-group work-exp-toggle">
-                  <button
-                    type="button"
-                    class="toggle-btn active"
-                    onclick="toggleWorkExperience('experience')"
-                  >
-                    Experience
-                  </button>
-                  <button
-                    type="button"
-                    class="toggle-btn"
-                    onclick="toggleWorkExperience('fresher')"
-                  >
-                    Fresher
-                  </button>
+                <div id="experienceContainer">
+                  <div class="experience-item" data-index="0">
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label
+                          >Organization / University<span class="required"
+                            >*</span
+                          ></label
+                        >
+                        <input
+                          type="text"
+                          class="experience-organization"
+                          placeholder="Enter Organization / University"
+                          required
+                        />
+                      </div>
+                      <div class="form-field">
+                        <label
+                          >Designation/Post held<span class="required"
+                            >*</span
+                          ></label
+                        >
+                        <input
+                          type="text"
+                          class="experience-designation"
+                          placeholder="Enter Designation/Post held"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label>From Date<span class="required">*</span></label>
+                        <input type="date" class="experience-from" required />
+                      </div>
+                      <div class="form-field">
+                        <label>To Date<span class="required">*</span></label>
+                        <input type="date" class="experience-to" required />
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field">
+                        <label
+                          >Current Salary (Gross per month)</label
+                        >
+                        <input
+                          type="text"
+                          class="experience-salary"
+                          placeholder="Enter Current Salary"
+                          required
+                        />
+                      </div>
+                      <div class="form-field checkbox-field">
+                        <input
+                          type="checkbox"
+                          class="experience-current-role"
+                        />
+                        <label>I am currently working in this role</label>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-field remove-btn-container">
+                        <button
+                          type="button"
+                          class="remove-experience-btn"
+                          onclick="removeExperience(this)"
+                          style="display: none"
+                        >
+                          ✕ Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div id="experienceFields">
-                  <div class="form-row">
-                    <div class="form-field">
-                      <label
-                        >Organization / University<span class="required"
-                          >*</span
-                        ></label
-                      >
-                      <input
-                        type="text"
-                        id="organization"
-                        placeholder="Enter Organization / University"
-                      />
-                    </div>
-                    <!-- <div class="form-field">
-                      <label
-                        >Teaching/Industry<span class="required">*</span></label
-                      >
-                      <select id="teachingIndustry">
-                        <option value="">Select Teaching/Industry</option>
-                        <option value="teaching">Teaching</option>
-                        <option value="industry">Industry</option>
-                      </select>
-                    </div> -->
-                    <div class="form-field">
-                      <label
-                        >Designation/Post held<span class="required"
-                          >*</span
-                        ></label
-                      >
-                      <input
-                        type="text"
-                        id="designation"
-                        placeholder="Enter Designation/Post held"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-field">
-                      <label>Last Salary<span class="required">*</span></label>
-                      <input type="date" id="fromDate" />
-                    </div>
-                    <div class="form-field">
-                      <label>To Date<span class="required">*</span></label>
-                      <input type="date" id="toDate" />
-                    </div>
-                    <div class="form-field">
-                      <label
-                        >Current Salary (Gross per month)<span class="required"
-                          >*</span
-                        ></label
-                      >
-                      <input
-                        type="text"
-                        id="salary"
-                        placeholder="Enter Current Salary"
-                      />
-                    </div>
-                    <!-- <div class="form-field">
-                      <label
-                        >Notice Period<span class="required">*</span></label
-                      >
-                      <select id="noticePeriod">
-                        <option value="">Select Notice Period</option>
-                        <option value="immediate">Immediate</option>
-                        <option value="1-month">1 Month</option>
-                        <option value="2-months">2 Months</option>
-                        <option value="3-months">3 Months</option>
-                      </select>
-                    </div> -->
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-field checkbox-field">
-                      <input type="checkbox" id="currentRole" />
-                      <label for="currentRole"
-                        >I am currently working in this role</label
-                      >
-                    </div>
-                  </div>
+                <div class="add-experience-section">
+                  <button
+                    type="button"
+                    class="add-qualification-btn"
+                    onclick="addExperience()"
+                  >
+                    + Add Work Experience
+                  </button>
                 </div>
               </div>
             </div>
@@ -790,14 +776,11 @@
                   <div class="research-paper-item" data-index="0">
                     <div class="form-row">
                       <div class="form-field">
-                        <label
-                          >Scopus Indexed Publications</label
-                        >
+                        <label>Scopus Indexed Publications</label>
                         <input
                           type="text"
                           class="scopus-publications"
                           placeholder="Enter number of publications"
-                         
                         />
                       </div>
                       <div class="form-field">
@@ -806,52 +789,41 @@
                           type="text"
                           class="scopus-id"
                           placeholder="Enter Scopus ID"
-                          
                         />
                       </div>
                     </div>
 
                     <div class="form-row">
                       <div class="form-field">
-                        <label
-                          >Presented in Conference</label
-                        >
-                        <select class="conference-select" >
-                          <option value="">Select</option>                        
+                        <label>Presented in Conference</label>
+                        <select class="conference-select">
+                          <option value="">Select</option>
                           <option value="yes">Yes</option>
                           <option value="no">No</option>
                         </select>
                       </div>
                       <div class="form-field">
-                        <label
-                          >Title Of The Paper</label
-                        >
+                        <label>Title Of The Paper</label>
                         <input
                           type="text"
                           class="paper-title"
                           placeholder="Enter journal title"
-                          
                         />
                       </div>
                     </div>
 
                     <div class="form-row">
                       <div class="form-field">
-                        <label
-                          >Name of Journal</label
-                        >
+                        <label>Name of Journal</label>
                         <input
                           type="text"
                           class="journal-name"
                           placeholder="Enter journal name"
-                        
                         />
                       </div>
                       <div class="form-field">
-                        <label
-                          >Year of Publication</label
-                        >
-                        <input type="date" class="publication-year"/>
+                        <label>Year of Publication</label>
+                        <input type="date" class="publication-year" />
                       </div>
                     </div>
 

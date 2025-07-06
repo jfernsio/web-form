@@ -278,3 +278,34 @@ indianStates.forEach((state) => {
     updateResearchPaperRemoveButtons();
   };
 
+function addExperience() {
+  const container = document.getElementById("experienceContainer");
+  const items = container.querySelectorAll(".experience-item");
+  const newIndex = items.length;
+
+  const newItem = items[0].cloneNode(true);
+  newItem.setAttribute("data-index", newIndex);
+
+  // Clear inputs
+  newItem.querySelectorAll("input").forEach(input => {
+    if (input.type === "checkbox") input.checked = false;
+    else input.value = "";
+  });
+
+  // Show remove button
+  const removeBtn = newItem.querySelector(".remove-experience-btn");
+  removeBtn.style.display = "inline-block";
+  removeBtn.onclick = () => newItem.remove();
+
+  container.appendChild(newItem);
+}
+
+function removeExperience(btn) {
+  const container = document.getElementById("experienceContainer");
+  const allItems = container.querySelectorAll(".experience-item");
+  if (allItems.length > 1) {
+    btn.closest(".experience-item").remove();
+  } else {
+    alert("At least one work experience entry is required.");
+  }
+}
