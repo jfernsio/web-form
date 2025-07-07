@@ -112,3 +112,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// add other field functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const postSelect = document.getElementById("postApplied");
+  const otherField = document.getElementById("otherPostField");
+  const otherInput = document.getElementById("otherPostInput");
+
+  postSelect.addEventListener("change", () => {
+    if (postSelect.value === "other") {
+      otherField.style.display = "block";
+      otherInput.setAttribute("required", "required");
+    } else {
+      otherField.style.display = "none";
+      otherInput.removeAttribute("required");
+      otherInput.value = "";
+    }
+  });
+});
