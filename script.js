@@ -309,3 +309,35 @@ function removeExperience(btn) {
     alert("At least one work experience entry is required.");
   }
 }
+
+let experienceIndex = 0;
+
+// Work experience toggle function
+function workExperience(value) {
+    const experienceSection = document.getElementById("experienceContainer");
+    const addExpSection = document.querySelector(".add-experience-section");
+    const buttons = document.querySelectorAll(".work-exp-toggle .toggle-btn");
+
+    if (value === "fresher") {
+        if (experienceSection) experienceSection.style.display = "none";
+        if (addExpSection) addExpSection.style.display = "none";
+        buttons.forEach(button => {
+            if (button.dataset.value === "fresher") {
+                button.classList.add("active");
+            } else {
+                button.classList.remove("active");
+            }
+        });
+    } else if (value === "experience") {
+        if (experienceSection) experienceSection.style.display = "block";
+        if (addExpSection) addExpSection.style.display = "block";
+        buttons.forEach(button => {
+            if (button.dataset.value === "experience") {
+                button.classList.add("active");
+            } else {
+                button.classList.remove("active");
+            }
+        });
+    }
+}
+  

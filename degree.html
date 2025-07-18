@@ -284,17 +284,41 @@
                     <select id="institute">
                       <option value="">-- Select --</option>
                       <option value="arts">Bachelor of Arts (B.A)</option>
-                      <option value="commerce">Bachelor of Commerce (B.COM)</option>
-                      <option value="commerce">Bachelor of Commerce Accounting & Finance (B.A.F)</option>
-                      <option value="commerce">Bachelor of Commerce Banking And Insurance (B.B.I)</option>
-                      <option value="commerce">Bachelor of Commerce Financial Markets (B.F.M)</option>
-                      <option value="commerce">Bachelor of Commerce Management Studies (B.M.S)</option>
-                      <option value="commerce">Bachelor of Science Information Technology (B.SC-IT)</option>
-                      <option value="commerce">Bachelor of Commerce Cost and Management Accounting (B.C.M.A.)</option>
-                      <option value="commerce">Bachelor of Commerce Digital Business (B.D.B.)</option>
-                      <option value="commerce">Bachelor of Arts In Mass Media And Communication (B.A.M.M.C)</option>
-                      <option value="commerce">Master Of Commerce (M.COM)</option>
-                      <option value="commerce">Master of Arts – Psychology with Clinical Specialization</option>
+                      <option value="commerce">
+                        Bachelor of Commerce (B.COM)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Accounting & Finance (B.A.F)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Banking And Insurance (B.B.I)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Financial Markets (B.F.M)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Management Studies (B.M.S)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Science Information Technology (B.SC-IT)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Cost and Management Accounting
+                        (B.C.M.A.)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Commerce Digital Business (B.D.B.)
+                      </option>
+                      <option value="commerce">
+                        Bachelor of Arts In Mass Media And Communication
+                        (B.A.M.M.C)
+                      </option>
+                      <option value="commerce">
+                        Master Of Commerce (M.COM)
+                      </option>
+                      <option value="commerce">
+                        Master of Arts – Psychology with Clinical Specialization
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -601,6 +625,25 @@
             <div class="form-group-container">
               <div class="section-header">Work Experience</div>
               <div class="form-content">
+                <div class="button-group work-exp-toggle">
+                  <button
+                    type="button"
+                    class="toggle-btn active"
+                    data-value="experience"
+                    onclick="workExperience('experience')"
+                  >
+                    Experience
+                  </button>
+                  <button
+                    type="button"
+                    class="toggle-btn"
+                    data-value="fresher"
+                    onclick="workExperience('fresher')"
+                  >
+                    Fresher
+                  </button>
+                </div>
+
                 <div id="experienceContainer">
                   <div class="experience-item" data-index="0">
                     <div class="form-row">
@@ -645,14 +688,11 @@
 
                     <div class="form-row">
                       <div class="form-field">
-                        <label
-                          >Current Salary (Gross per month)</label
-                        >
+                        <label>Current Salary (Gross per month)</label>
                         <input
                           type="text"
                           class="experience-salary"
                           placeholder="Enter Current Salary"
-                          required
                         />
                       </div>
                       <div class="form-field checkbox-field">
@@ -687,6 +727,7 @@
                   >
                     + Add Work Experience
                   </button>
+                </div>
               </div>
             </div>
 
