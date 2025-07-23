@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import ExcelJS from 'exceljs';
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config();
 const app = express();
 
@@ -19,6 +20,8 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
 });
+
+app.use(cors());
 
 app.get('/export', async (req, res) => {
   try {
