@@ -32,4 +32,63 @@ document.addEventListener('keypress', () => lastActivity = Date.now());
 setInterval(checkAutoLogout, 60000);
 
 // Initialize dashboard when page loads
-document.addEventListener('DOMContentLoaded', initializeDashboard);
+// document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+//fetch excel from backend
+
+const fe = document.getElementById('download-excel');
+const fp = document.getElementById('download-pdf');
+
+const fetchExcel =  async () =>{
+    try {
+    const res = await fetch('http://localhost:3000/export');
+    if (!res.ok) {
+        throw new Error('Failed to fetch Excel');
+    }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'applicants.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+} catch (error) {
+    alert('Error downloading excel file: ' + error.message);
+    console.error(error);
+}
+}
+
+const fetchPdf =  async () =>{
+    try {
+    const res = await fetch('http://localhost:3000/export/pdf',{
+        headers: {
+            'Content-Type': 'application/pdf'
+        }
+    });
+    if (!res.ok) {
+        throw new Error('Failed to fetch PDF');
+    }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'applicants.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+} catch (error) {
+    alert('Error downloading pdf file: ' + error.message);
+    console.error(error);
+}
+}
+
+fe.addEventListener('click', ()=>{
+    fetchExcel();
+});
+
+fp.addEventListener('click', ()=>{
+    fetchPdf();
+});
