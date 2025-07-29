@@ -16,25 +16,32 @@ const upload = multer({ storage });
 applicationRouter.post('/', upload.single('resume'), async (req, res) => {
   const t = await db.sequelize.transaction();
   try {
+    console.log("Request Body:", req.body); 
+    console.log("Uploaded File:", req.file);
     const {
-      postAppliedFor, firstName, middleName, lastName, gender,
+      postAppliedFor,personalInfoTitle, firstName, middleName, lastName, gender,
       dob, email, altEmail, mobile, altMobile, address, state,
+      maritalStatus,institute,age,
       city, pinCode, caste, aadhar, pan, declaration,
-      currentSalary, expectedSalary,
-      qualifications, experiences, awards, publications,
-      courses, phds, additionalInfo,
+      qualifications, workExperiences, awardTitle, awardOrganizationName, awardNature, awardOrganizationRecognition, researchPapers,
+      courseCollegeName,courseClassName, courseSubjectName,courseYearsOfExp,courseFromDate,courseToDate, courseDepartmentType, courseTypeOfContract, courseLastSalary, courseApprovedByUni,  courseLetterNumber,  courseLetterDate,
+      phdStatus, phdUniversity, phdYear, netStatus, netYear, setStatus, setYear, referenceName, appliedFor, currentSalary, expectedSalary, extraCurricular
     } = req.body;
 
     const app = await db.Application.create({
       postAppliedFor,
+      title : personalInfoTitle,
       firstName,
       middleName,
       lastName,
       gender,
       dob,
+      age,
       email,
       altEmail,
       mobile,
+      maritalStatus,
+      institute,
       altMobile,
       address,
       state,
@@ -45,34 +52,72 @@ applicationRouter.post('/', upload.single('resume'), async (req, res) => {
       pan,
       declaration: declaration === 'true',
       resumeFile: req.file?.filename,
-      currentSalary,
-      expectedSalary,
     }, { transaction: t });
 
-    const application_id = app.id;
+    const applicationId = app.id;
 
     // Bulk create child tables
     if (qualifications) await db.Qualification.bulkCreate(
-      JSON.parse(qualifications).map((q) => ({ ...q, application_id })), { transaction: t }
+      JSON.parse(qualifications).map((q) => ({ ...q, applicationId })), { transaction: t }
     );
-    if (experiences) await db.Experience.bulkCreate(
-      JSON.parse(experiences).map((e) => ({ ...e, application_id })), { transaction: t }
+    if (workExperiences) await db.Experience.bulkCreate(
+      JSON.parse(workExperiences).map((e) => ({ ...e, applicationId })), { transaction: t }
     );
-    if (awards) await db.Award.bulkCreate(
-      JSON.parse(awards).map((a) => ({ ...a, application_id })), { transaction: t }
+
+    if (researchPapers) await db.Publication.bulkCreate(
+      JSON.parse(researchPapers).map((p) => ({ ...p, applicationId })), { transaction: t }
     );
-    if (publications) await db.Publication.bulkCreate(
-      JSON.parse(publications).map((p) => ({ ...p, application_id })), { transaction: t }
-    );
-    if (courses) await db.Course.bulkCreate(
-      JSON.parse(courses).map((c) => ({ ...c, application_id })), { transaction: t }
-    );
-    if (phds) await db.Phd.bulkCreate(
-      JSON.parse(phds).map((phd) => ({ ...phd, application_id })), { transaction: t }
-    );
-    if (additionalInfo) await db.AdditionalInfo.create(
-      { ...JSON.parse(additionalInfo), application_id }, { transaction: t }
-    );
+ 
+    //single recors
+    if (awardTitle || awardOrganizationName || awardNature || awardOrganizationRecognition) {
+      await db.Award.create({
+        applicationId,
+        awardTitle, 
+        awardOrganizationName,
+        awardNature,
+        awardOrganizationRecognition,
+      }, { transaction: t });
+    }
+
+   if (courseCollegeName || courseClassName || courseSubjectName || courseYearsOfExp) { 
+        await db.Course.create({
+            applicationId,
+            courseCollegeName,
+            courseClassName,
+            courseSubjectName,
+            courseYearsOfExp,
+            courseFromDate,
+            courseToDate,
+            courseDepartmentType,
+            courseTypeOfContract,
+            courseLastSalary,
+            courseApprovedByUni, 
+            courseLetterNumber,
+            courseLetterDate,
+        }, { transaction: t });
+    }
+
+  if (referenceName || appliedFor || extraCurricular) {
+      await db.AdditionalInfo.create({
+        applicationId,
+        referenceName,
+        appliedFor,
+        currentSalary,
+        expectedSalary,
+        extraCurricular,
+      }, { transaction: t });
+    }
+
+ if (phdStatus && phdStatus !== 'not-applicable') {
+      await db.Phd.create({
+        applicationId,
+        phdStatus,
+        phdUniversity,
+        phdYear,
+        netYear: netStatus === 'yes' ? netYear : null,
+        setYear: setStatus === 'yes' ? setYear : null,
+      }, { transaction: t });
+    }
 
     await t.commit();
     res.status(201).json({ message: 'Application submitted successfully' });
