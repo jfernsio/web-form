@@ -8,7 +8,6 @@
   </head>
   <body>
     <div class="application-container">
-      <!-- Header -->
       <div class="header">
         <div class="university-info">
           <img src="./assets/lsrc.jpg" alt="College Logo" />
@@ -19,15 +18,12 @@
         <div class="form-section">
           <div class="form-title-container">
             <h2 class="form-title">APPLICATION FORM</h2>
-            <!--             <h3 class="quota-title">QUOTA</h3>÷-->
           </div>
 
           <div class="faculty-header">
-            <!-- <p>Fields with <span class="required">*</span> are mandatory</p> -->
-          </div>
+            </div>
 
           <form id="applicationForm" class="application-form">
-            <!-- Post Applied For -->
             <div class="form-group-container">
               <div class="section-header">Post Applied For</div>
               <div class="form-content">
@@ -56,14 +52,13 @@
               </div>
             </div>
 
-            <!-- Personal Information -->
             <div class="form-group-container">
               <div class="section-header">Personal Information</div>
               <div class="form-content">
                 <div class="form-row">
                   <div class="form-field">
                     <label>Title<span class="required">*</span></label>
-                    <select id="title" required>
+                    <select id="personalInfoTitle" required>
                       <option value="">Select</option>
                       <option value="dr">Dr.</option>
                       <option value="mr">Mr.</option>
@@ -110,7 +105,7 @@
                   </div>
                   <div class="form-field">
                     <label>Gender<span class="required">*</span></label>
-                    <div class="button-group">
+                    <div class="button-group gender-toggle-group">
                       <button
                         type="button"
                         class="toggle-btn"
@@ -140,7 +135,7 @@
                   </div>
                   <div class="form-field">
                     <label>Marital Status<span class="required">*</span></label>
-                    <div class="button-group">
+                    <div class="button-group marital-status-toggle-group">
                       <button
                         type="button"
                         class="toggle-btn"
@@ -237,7 +232,7 @@
                         <label>Address<span class="required">*</span></label>
                         <input
                           type="text"
-                          id="Address"
+                          id="address"
                           placeholder="Enter Address"
                           required
                         />
@@ -325,7 +320,6 @@
               </div>
             </div>
 
-            <!-- Qualifications -->
             <div class="form-group-container">
               <div class="section-header">Qualifications</div>
               <div class="form-content">
@@ -400,7 +394,7 @@
                           >Year of Passing<span class="required">*</span></label
                         >
 
-                        <input type="date" id="fromDate" />
+                        <input type="date" class="qualification-year-of-passing" required />
                       </div>
                       <div class="form-field">
                         <label>Percentage</label>
@@ -447,7 +441,6 @@
               </div>
             </div>
 
-            <!-- Ph.D. Section -->
             <div class="form-group-container">
               <div class="section-header">Ph.D.</div>
               <div class="form-content">
@@ -489,87 +482,19 @@
                     />
                   </div>
                 </div>
-
-                <!-- Ph.D. Publications & Conferences Section -->
-                <!-- <div class="form-row">
-                  <div class="form-field">
-                    <label
-                      >Number of Scopus Indexed Publications<span
-                        class="required"
-                        >*</span
-                      ></label
-                    >
-                    <input
-                      type="text"
-                      id="scopusPublications"
-                      placeholder="Enter Number of Scopus Publications"
-                    />
-                  </div>
-                  <div class="form-field">
-                    <label>Scopus ID<span class="required">*</span></label>
-                    <input
-                      type="text"
-                      id="scopusId"
-                      placeholder="Enter Scopus ID"
-                    />
-                  </div>
-                  <div class="form-field">
-                    <label
-                      >Paper Presented in Conferences<span class="required"
-                        >*</span
-                      ></label
-                    >
-                    <div class="button-group">
-                      <button
-                        type="button"
-                        class="toggle-btn active"
-                        onclick="togglePaperPresented('yes')"
-                      >
-                        Yes
-                      </button>
-                      <button
-                        type="button"
-                        class="toggle-btn"
-                        onclick="togglePaperPresented('no')"
-                      >
-                        No
-                      </button>
-                    </div>
-                    <input type="hidden" id="paperPresented" value="yes" />
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-field">
-                    <label
-                      >Number of WoS Indexed Publications<span class="required"
-                        >*</span
-                      ></label
-                    >
-                    <input
-                      type="text"
-                      id="wosPublications"
-                      placeholder="Enter Number of WoS Publications"
-                    />
-                  </div>
-                  <div class="form-field">
-                    <label>WoS ID<span class="required">*</span></label>
-                    <input type="text" id="wosId" placeholder="Enter WoS ID" />
-                  </div>
-                </div> -->
               </div>
             </div>
 
-            <!-- exam section -->
             <div class="form-group-container">
               <div class="form-content">
                 <div class="exam-section">
                   <div class="exam-group">
                     <span class="exam-label">NET</span>
-                    <div class="button-group">
+                    <div class="button-group net-toggle-group">
                       <button
                         type="button"
-                        class="toggle-btn active"
+                        class="toggle-btn"
+                        data-value="yes"
                         onclick="toggleExam('net', 'yes')"
                       >
                         Yes
@@ -577,6 +502,7 @@
                       <button
                         type="button"
                         class="toggle-btn"
+                        data-value="no"
                         onclick="toggleExam('net', 'no')"
                       >
                         No
@@ -588,15 +514,16 @@
                       placeholder="Enter Year"
                       class="year-input"
                     />
-                    <input type="hidden" id="netStatus" value="yes" />
+                    <input type="hidden" id="netStatus" />
                   </div>
 
                   <div class="exam-group">
                     <span class="exam-label">SET</span>
-                    <div class="button-group">
+                    <div class="button-group set-toggle-group">
                       <button
                         type="button"
-                        class="toggle-btn active"
+                        class="toggle-btn"
+                        data-value="yes"
                         onclick="toggleExam('set', 'yes')"
                       >
                         Yes
@@ -604,6 +531,7 @@
                       <button
                         type="button"
                         class="toggle-btn"
+                        data-value="no"
                         onclick="toggleExam('set', 'no')"
                       >
                         No
@@ -615,20 +543,19 @@
                       placeholder="Enter Year"
                       class="year-input"
                     />
-                    <input type="hidden" id="setStatus" value="yes" />
+                    <input type="hidden" id="setStatus" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Work Experience -->
             <div class="form-group-container">
               <div class="section-header">Work Experience</div>
               <div class="form-content">
                 <div class="button-group work-exp-toggle">
                   <button
                     type="button"
-                    class="toggle-btn active"
+                    class="toggle-btn"
                     data-value="experience"
                     onclick="workExperience('experience')"
                   >
@@ -731,7 +658,6 @@
               </div>
             </div>
 
-            <!-- Courses Taught  -->
             <div class="form-group-container">
               <div class="section-header">Courses Taught</div>
               <div class="form-content">
@@ -740,7 +666,7 @@
                     <label>College Name </label>
                     <input
                       type="text"
-                      id="collegeName"
+                      id="courseCollegeName"
                       placeholder="Enter College Name"
                     />
                   </div>
@@ -748,7 +674,7 @@
                     <label>Class Name </label>
                     <input
                       type="text"
-                      id="className"
+                      id="courseClassName"
                       placeholder="Enter Class Name"
                     />
                   </div>
@@ -756,7 +682,7 @@
                     <label>Subject Name </label>
                     <input
                       type="text"
-                      id="subjectName"
+                      id="courseSubjectName"
                       placeholder="Enter Subject Name"
                     />
                   </div>
@@ -764,21 +690,21 @@
                     <label>Years of Experience </label>
                     <input
                       type="tel"
-                      id="yearsOfExp"
+                      id="courseYearsOfExp"
                       placeholder="Enter Years of Experience"
                     />
                   </div>
                   <div class="form-field">
                     <label>From Date</label>
-                    <input type="date" id="fromDate" />
+                    <input type="date" id="courseFromDate" />
                   </div>
                   <div class="form-field">
                     <label>To Date</label>
-                    <input type="date" id="toDate" />
+                    <input type="date" id="courseToDate" />
                   </div>
                   <div class="form-field">
                     <label>Department Type</label>
-                    <select id="departmentType" required>
+                    <select id="courseDepartmentType">
                       <option value="">Select Department Type</option>
                       <option value="degree">Degree</option>
                       <option value="junior">Junior</option>
@@ -786,7 +712,7 @@
                   </div>
                   <div class="form-field">
                     <label>Type of Contract</label>
-                    <select id="typeOfContract" required>
+                    <select id="courseTypeOfContract">
                       <option value="">Select Type of Contract</option>
                       <option value="temporary">Temporary</option>
                       <option value="permanent">Permanent</option>
@@ -796,11 +722,11 @@
                   </div>
                   <div class="form-field">
                     <label>Last Salary</label>
-                    <input type="tel" id="lastSalary" />
+                    <input type="tel" id="courseLastSalary" />
                   </div>
                   <div class="form-field">
                     <label>Approved By University</label>
-                    <select id="approvedByUni" required>
+                    <select id="courseApprovedByUni">
                       <option value="">Select</option>
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
@@ -808,17 +734,16 @@
                   </div>
                   <div class="form-field">
                     <label>Letter Number</label>
-                    <input type="tel" id="letterNumber" />
+                    <input type="tel" id="courseLetterNumber" />
                   </div>
                   <div class="form-field">
                     <label>Letter Date</label>
-                    <input type="date" id="letterDate" />
+                    <input type="date" id="courseLetterDate" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Research Papers -->
             <div class="form-group-container">
               <div class="section-header">Research Publication</div>
               <div class="form-content">
@@ -912,20 +837,23 @@
               </div>
             </div>
 
-            <!-- Awards -->
             <div class="form-group-container">
               <div class="section-header">Awards</div>
               <div class="form-content">
                 <div class="form-row">
                   <div class="form-field">
                     <label>Title </label>
-                    <input type="text" id="title" placeholder="Enter Title" />
+                    <input
+                      type="text"
+                      id="awardTitle"
+                      placeholder="Enter Title"
+                    />
                   </div>
                   <div class="form-field">
                     <label>Organization Name </label>
                     <input
                       type="text"
-                      id="organizationName"
+                      id="awardOrganizationName"
                       placeholder="Enter Organization Name"
                     />
                   </div>
@@ -933,15 +861,15 @@
                     <label>Nature of Award </label>
                     <input
                       type="text"
-                      id="Nature of Award"
+                      id="awardNature"
                       placeholder="Enter Nature of Award"
                     />
                   </div>
 <!--                   <div class="form-field">
-                    <label>Expected Salary </label>
+                    <label>Organization Recognition </label>
                     <input
                       type="text"
-                      id="organizationRecognition"
+                      id="awardOrganizationRecognition"
                       placeholder="Enter Organization Recognition"
                     />
                   </div> -->
@@ -949,17 +877,16 @@
               </div>
             </div>
 
-            <!-- Additional Information -->
             <div class="form-group-container">
               <div class="section-header">Additional Information</div>
               <div class="form-content">
                 <div class="form-row">
                   <div class="form-field">
-                    <label>Refrence Name </label>
+                    <label>Reference Name </label>
                     <input
                       type="text"
-                      id="refrenceName"
-                      placeholder="Enter Refrence Name"
+                      id="referenceName"
+                      placeholder="Enter Reference Name"
                     />
                   </div>
                   <div class="form-field">
@@ -1002,7 +929,6 @@
               </div>
             </div>
 
-            <!-- Resume Upload -->
             <div class="form-group-container">
               <div class="section-header">Resume Upload</div>
               <div class="form-content resume-section">
@@ -1031,7 +957,6 @@
               </div>
             </div>
 
-            <!-- Declaration -->
             <div class="form-group-container">
               <div class="section-header">Declaration</div>
               <div class="form-content confirmation-section">
@@ -1044,7 +969,6 @@
               </div>
             </div>
 
-            <!-- Submit Button -->
             <div class="submit-section">
               <button type="submit" class="submit-btn">
                 ✓ SUBMIT APPLICATION
@@ -1055,6 +979,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="submit.js"></script>
   </body>
 </html>
