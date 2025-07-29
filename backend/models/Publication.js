@@ -1,26 +1,15 @@
-    // import { sequelize } from '../config/database';
-    // import { DataTypes } from 'sequelize';
-
-    // const Publication = sequelize.define('Publication', {
-    //     application_id: DataTypes.INTEGER,
-    //     scoups_indexed: DataTypes.STRING,
-    //     scoups_id: DataTypes.STRING,
-    //     presented_at_conference: DataTypes.STRING,
-    //     paper_title: DataTypes.STRING,
-    //     journal_name: DataTypes.STRING,
-    //     publication_date: DataTypes.STRING,
-    //     no_of_approved_papers: DataTypes.STRING,
-    // })
-
-    // return Publication;
 import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
   const Publication = sequelize.define('Publication', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    journal: { type: DataTypes.STRING },
-    year: { type: DataTypes.STRING },
+    scopusPublications: { type: DataTypes.STRING, allowNull: false },
+    scopusId: { type: DataTypes.STRING, allowNull: false},
+    presentedInConference: { type: DataTypes.STRING, allowNull: false },
+    paperTitle: { type: DataTypes.STRING, allowNull: false },
+    journalName: { type: DataTypes.STRING, allowNull: false },
+    publicationYear: { type: DataTypes.STRING, allowNull: false },
+    approvedPapers: { type: DataTypes.STRING, allowNull: false },
     applicationId: { type: DataTypes.INTEGER, allowNull: false },
   });
 

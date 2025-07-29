@@ -5,12 +5,13 @@ export default (sequelize) => {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
 
     postAppliedFor: { type: DataTypes.STRING },
+    title: { type: DataTypes.STRING },
     firstName: { type: DataTypes.STRING },
     middleName: { type: DataTypes.STRING },
     lastName: { type: DataTypes.STRING },
     gender: { type: DataTypes.STRING },
     dob: { type: DataTypes.STRING },
-
+    age: { type: DataTypes.INTEGER },
     email: { type: DataTypes.STRING },
     altEmail: { type: DataTypes.STRING },
     mobile: { type: DataTypes.STRING },
@@ -28,8 +29,8 @@ export default (sequelize) => {
     resumeFile: { type: DataTypes.STRING },
     declaration: { type: DataTypes.BOOLEAN },
 
-    currentSalary: { type: DataTypes.STRING },
-    expectedSalary: { type: DataTypes.STRING },
+    maritalStatus: { type: DataTypes.STRING },
+    institute: { type: DataTypes.STRING },
   });
 
   Application.associate = (models) => {
