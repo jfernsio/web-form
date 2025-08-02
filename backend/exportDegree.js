@@ -21,7 +21,11 @@ app.get('/degreeExcel', async (req, res) => {
         const [applicants] = await connection.execute('SELECT * FROM Applications');
         const [qualifications] = await connection.execute('SELECT * FROM Qualifications');
         const [experience] = await connection.execute('SELECT * FROM Experiences');
-    
+        const [phds] = await connection.execute('SELECT * FROM Phds');
+        const [courses] = await connection.execute('SELECT * FROM Courses');
+        const [awards] = await connection.execute('SELECT * FROM Awards');
+        const [publications] = await connection.execute('SELECT * FROM Publications');
+        const [additionalInfo] = await connection.execute('SELECT * FROM AdditionalInfos');
         const workbook = new ExcelJS.Workbook();
     
         // 📄 Applicants
@@ -87,6 +91,80 @@ app.get('/degreeExcel', async (req, res) => {
         ];
         experience.forEach(row => expSheet.addRow(row));
     
+        //phds
+        const phdSheet = workbook.addWorksheet('PHD');
+        phdSheet.columns = [
+          { header: 'ID', key: 'id' },
+          { header: 'Applicant ID', key: 'applicationId' },
+          { header: 'Status', key: 'phdStatus' },
+          { header: 'University Name', key: 'phdUniversity' },
+          { header: 'Phd Year', key: 'phdYear' },
+          { header: 'Net Year', key: 'netYear' },
+          { header: 'Set Year', key: 'setYear' },
+          
+        ];
+        phds.forEach(row => phdSheet.addRow(row));
+
+        //courses
+        const courseSheet = workbook.addWorksheet('Courses');
+        courseSheet.columns = [
+          { header: 'ID', key: 'id' },
+          { header: 'Applicant ID', key: 'applicationId' },
+          { header: 'College Name', key: 'courseCollegeName' },
+          { header: 'Class Name', key: 'courseClassName' },
+          { header: 'Subject Name', key: 'courseSubjectName' },
+          { header: 'Years of Experience', key: 'courseYearsOfExp' },
+          { header: 'From Date', key: 'courseFromDate', width: 20,},
+          { header: 'To Date', key: 'courseToDate', width: 20, },
+          { header: 'Department Type', key: 'courseDepartmentType' },
+          { header: 'Type of Contract', key: 'courseTypeOfContract' },
+          { header: 'Last Salary', key: 'courseLastSalary' },
+          { header: 'Approved By University', key: 'courseApprovedByUni' },
+          { header: 'Letter Number', key: 'courseLetterNumber' },
+          { header: 'Letter Date', key: 'courseLetterDate', width: 20, },
+        ];
+        courses.forEach(row => courseSheet.addRow(row));
+
+        //Publications
+        const publicationSheet = workbook.addWorksheet('Publications');
+        publicationSheet.columns = [
+          { header: 'ID', key: 'id' },
+          { header: 'Applicant ID', key: 'applicationId' },
+          { header: 'Scopus Publications', key: 'scopusPublications' },
+          { header: 'Scopus ID', key: 'scopusId' },
+          { header: 'Presented In Conference', key: 'presentedInConference' },
+          { header: 'Paper Title', key: 'paperTitle' },
+          { header: 'Journal Name', key: 'journalName' },
+          { header: 'Publication Year', key: 'publicationYear' },
+          { header: 'ApprovedPapers', key: 'approvedPapers' },
+        ]
+        publications.forEach(row => publicationSheet.addRow(row));
+
+        //Awards
+        const awardSheet = workbook.addWorksheet('Awards');
+        awardSheet.columns = [
+          { header: 'ID', key: 'id' },
+          { header: 'Applicant ID', key: 'applicationId' },
+          { header: 'Title', key: 'awardTitle' },
+          { header: 'Organization Name', key: 'awardOrganizationName' },
+          { header: 'Nature of Award', key: 'awardNature' },
+          { header: 'Organization Recognition', key: 'awardOrganizationRecognition' }
+        ];
+        awards.forEach(row => awardSheet.addRow(row));
+
+        //Addotipmal Info
+        const additionalInfoSheet = workbook.addWorksheet('Additional Info');
+        additionalInfoSheet.columns = [
+          { header: 'ID', key: 'id' },
+          { header: 'Applicant ID', key: 'applicationId' },
+          { header: 'Reference Name', key: 'referenceName' },
+          { header: 'Applied For', key: 'appliedFor' },
+          { header: 'Current Salary', key: 'currentSalary' },
+          { header: 'Expected Salary', key: 'expectedSalary' },
+          { header: 'Extra Curricular', key: 'extraCurricular', width: 20 },
+        ]
+        additionalInfo.forEach(row => additionalInfoSheet.addRow(row));
+
         // 📤 Output
         res.setHeader(
           'Content-Type',
