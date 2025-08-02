@@ -530,16 +530,15 @@ document.getElementById('applicationForm').addEventListener('submit', async func
       const designation = item.querySelector('.experience-designation').value;
       const fromDate = item.querySelector('.experience-from').value;
       const toDate = item.querySelector('.experience-to').value;
-      const salary = item.querySelector('.experience-salary').value;
-      const currentRole = item.querySelector('.experience-current-role').checked;
-
+      const currentSalary = item.querySelector('.experience-salary').value;
+      const currentlyWorking = item.querySelector('.experience-current-role').checked;
       workExperiences.push({
         organization,
         designation,
         fromDate,
         toDate,
-        salary,
-        currentRole
+        currentSalary,
+        currentlyWorking
       });
     });
   }
