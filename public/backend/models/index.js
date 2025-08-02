@@ -1,8 +1,6 @@
-// db.js
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 import userModel from './userModel.js';
-
 
 dotenv.config();
 
@@ -14,20 +12,13 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: 'mysql',
     logging: false,
-    pool: {
-      max: 1,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
+    pool: { max: 1, min: 0, acquire: 30000, idle: 10000 }
   }
 );
 
-// Initialize models
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-db.User = userModel(sequelize); 
+db.User = userModel(sequelize); // Correct usage
 
 export default db;
