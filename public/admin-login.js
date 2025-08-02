@@ -1,41 +1,56 @@
+// admin-login.js
 
-// Admin credentials (in a real application, this would be handled on the server)
-const ADMIN_CREDENTIALS = {
-    username: 'admin',
-    password: 'admin123'
-};
+// Get DOM elements
+const loginForm = document.getElementById('loginForm');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const errorMessage = document.getElementById('errorMessage');
 
 // Check if already logged in
-if (localStorage.getItem('adminLoggedIn') === 'true') {
+const accessToken = localStorage.getItem('accessToken');
+if (accessToken) {
     window.location.href = 'admin-dashboard.html';
 }
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+// Redirect on success
+function redirectToDashboard() {
+    window.location.href = 'admin-dashboard.html';
+}
+
+// Login form handler
+loginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const errorMessage = document.getElementById('errorMessage');
-    
-    // Validate credentials
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-        // Set login status
-        localStorage.setItem('adminLoggedIn', 'true');
-        localStorage.setItem('loginTime', new Date().toISOString());
-        
-        // Hide error message
-        errorMessage.style.display = 'none';
-        
-        // Redirect to admin dashboard
-        window.location.href = 'admin-dashboard.html';
-    } else {
-        // Show error message
+
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    errorMessage.style.display = 'none';
+    errorMessage.textContent = '';
+
+    try {
+        const response = await fetch('http://localhost:3000/api/auth/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('user', JSON.stringify({ id: data.id, username: data.username }));
+            redirectToDashboard();
+        } else {
+            errorMessage.textContent = data.message || 'Login failed. Please try again.';
+            errorMessage.style.display = 'block';
+            passwordInput.value = '';
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        errorMessage.textContent = 'Network/server error. Please try again later.';
         errorMessage.style.display = 'block';
-        
-        // Clear password field
-        document.getElementById('password').value = '';
+        passwordInput.value = '';
     }
 });
 
-// Auto-focus on username field
-document.getElementById('username').focus();
+usernameInput.focus();
