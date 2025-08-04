@@ -61,7 +61,8 @@ setInterval(checkInactivity, 60 * 1000); // check every minute
 );
 
 // Excel download
-document.getElementById('download-excel').addEventListener('click', async () => {
+// Separate handler for Excel download
+async function handleExcelDownload() {
     try {
         const res = await fetch('http://localhost:3000/export');
         if (!res.ok) throw new Error('Failed to fetch Excel');
@@ -80,7 +81,10 @@ document.getElementById('download-excel').addEventListener('click', async () => 
         console.error(err);
         alert("Error downloading Excel: " + err.message);
     }
-});
+}
+
+// Attach the event listener
+// document.getElementById('download-non-excel').addEventListener('click', handleExcelDownload);
 
 // PDF download
 document.getElementById('download-pdf').addEventListener('click', async () => {
