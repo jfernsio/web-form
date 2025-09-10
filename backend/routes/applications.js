@@ -19,7 +19,7 @@ applicationRouter.post('/', upload.single('resume'), async (req, res) => {
     console.log("Request Body:", req.body); 
     console.log("Uploaded File:", req.file);
     const {
-      postAppliedFor,personalInfoTitle, firstName, middleName, lastName, gender,
+      postApplied,title, firstName, middleName, lastName, gender,
       dob, email, altEmail, mobile, altMobile, address, state,
       maritalStatus,institute,age,
       city, pinCode, caste, aadhar, pan, declaration,
@@ -29,8 +29,8 @@ applicationRouter.post('/', upload.single('resume'), async (req, res) => {
     } = req.body;
 
     const app = await db.Application.create({
-      postAppliedFor,
-      title : personalInfoTitle,
+      postAppliedFor:postApplied,
+      title,
       firstName,
       middleName,
       lastName,
