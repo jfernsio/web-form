@@ -61,10 +61,14 @@ setInterval(checkInactivity, 60 * 1000); // check every minute
 );
 
 // Excel download
-// Separate handler for Excel download
-async function handleExcelDownload() {
+
+async function handleExcelDownload(type) {
     try {
-        const res = await fetch('http://localhost:3000/export');
+        const res = await fetch(`http://localhost:3000/api/v1/export/${type}Excel` ,{
+              headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }
+    });
         if (!res.ok) throw new Error('Failed to fetch Excel');
 
         const blob = await res.blob();
@@ -83,30 +87,28 @@ async function handleExcelDownload() {
     }
 }
 
-// Attach the event listener
-// document.getElementById('download-non-excel').addEventListener('click', handleExcelDownload);
-
 // PDF download
-document.getElementById('download-pdf').addEventListener('click', async () => {
+async function handlePdfDownload(type) {
     try {
-        const res = await fetch('http://localhost:3000/export/pdf', {
-            headers: { 'Content-Type': 'application/pdf' }
-        });
-        if (!res.ok) throw new Error('Failed to fetch PDF');
+        const res = await fetch(`http://localhost:3000/api/v1/export/${type}Pdf` ,{
+              headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }
+    });
+        if (!res.ok) throw new Error('Failed to fetch Pdf');
 
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'applicants.pdf';
+        a.download = 'applicants.xlsx';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     } catch (err) {
         console.error(err);
-        alert("Error downloading PDF: " + err.message);
+        alert("Error downloading Pdf: " + err.message);
     }
-});
-
+}
