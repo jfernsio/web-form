@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import ExcelJS from 'exceljs';
 import puppeteer from 'puppeteer';
 import dotenv from 'dotenv';
+import path from 'path';
 import cors from 'cors';
 import PDFDocument from "pdfkit";
 
@@ -15,7 +16,7 @@ const dbConfig = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
 };
-
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.get('/degreeExcel', async (req, res) => {
       try {
         const connection = await mysql.createConnection(dbConfig);
@@ -59,8 +60,19 @@ app.get('/degreeExcel', async (req, res) => {
     style: { numFmt: 'yyyy-mm-dd hh:mm:ss' } // Example: date and time
    },
         ];
-        applicants.forEach(row => applicantSheet.addRow(row));
-    
+applicants.forEach(row => {
+  const newRow = applicantSheet.addRow(row);
+
+  if (row.resumeFile) {
+    const resumeCell = newRow.getCell('resumeFile'); // or newRow.getCell(4) if it's 4th column
+    resumeCell.value = {
+      text: 'Download CV',
+      hyperlink: `http://localhost:3000/uploads/${row.resumeFile}`
+    };
+    resumeCell.font = { color: { argb: 'FF0000FF' }, underline: true };
+  }
+});
+
         // 🎓 Qualifications
         const qualSheet = workbook.addWorksheet('Qualifications');
         qualSheet.columns = [
