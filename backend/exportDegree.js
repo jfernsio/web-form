@@ -222,9 +222,12 @@ app.get("/degreePdf", async (req, res) => {
     applicants.forEach((app) => {
       doc.fontSize(14).text(`${app.firstName} ${app.middleName || ""} ${app.lastName}`, { underline: true });
       doc.fontSize(12).text(`Post Applied: ${app.postAppliedFor}`);
-      doc.text(`Email: ${app.email} | Phone: ${app.mobile}`);
-      doc.text(`DOB: ${app.dob}`);
-      doc.text(`Address: ${app.address}`);
+      doc.text(`Email: ${app.email} | Phone: ${app.mobile} `);
+      doc.text(`Alt Email: ${app.altEmail} | Alt Phone: ${app.altMobile} `);
+      doc.text(`DOB: ${app.dob} | Gender: ${app.gender} | Age: ${app.age} | Marital Status: ${app.maritalStatus}`);
+      doc.text(`Address: ${app.address} | State: ${app.state} | City: ${app.city} | Pincode: ${app.pinCode}`);
+      doc.text(`Caste: ${app.caste} | Aadhar: ${app.aadhar} | Pan: ${app.pan}`);
+      doc.text(`Institute applied to: ${app.institute} | Resume: ${app.resumeFile}`);
       doc.moveDown();
 
       // Qualifications
@@ -232,7 +235,8 @@ app.get("/degreePdf", async (req, res) => {
       const appQuals = qualifications.filter((q) => q.applicationId === app.id);
       if (appQuals.length) {
         appQuals.forEach((q) => {
-          doc.fontSize(11).text(`- ${q.degree} | ${q.universityName} | ${q.yearOfPassing}`);
+          doc.fontSize(11).text(`- ${q.degree} | ${q.degreeName} |${q.universityName} | ${q.yearOfPassing}`);
+          doc.text(`Education Mode: ${q.educationMode} | Specialization: ${q.specialization} | Percentage: ${q.percentage || "-"} | CGPA: ${q.cgpa || "-"}`);
         });
       } else {
         doc.fontSize(11).text("No qualifications listed.");
@@ -244,7 +248,8 @@ app.get("/degreePdf", async (req, res) => {
       const appExps = experience.filter((e) => e.applicationId === app.id);
       if (appExps.length) {
         appExps.forEach((e) => {
-          doc.fontSize(11).text(`- ${e.organization} | ${e.designation || "Other"} | ${e.fromDate} - ${e.toDate || "Present"}`);
+          doc.fontSize(11).text(`- ${e.organization} | ${e.designation } | ${e.fromDate} - ${e.toDate || "Present"}`);
+          doc.text(`Currently Working: ${e.currentlyWorking ? "Yes" : "No"} | Current Salary: ${e.currentSalary}`);
         });
       } else {
         doc.fontSize(11).text("Fresher");
@@ -257,6 +262,7 @@ app.get("/degreePdf", async (req, res) => {
       if (appPhds.length) {
         appPhds.forEach((p) => {
           doc.fontSize(11).text(`- ${p.phdStatus} | ${p.phdUniversity} | ${p.phdYear}`);
+          doc.text(`NET Year: ${p.netYear || "na"} | SET Year: ${p.setYear || "na"}`);
         });
       } else {
         doc.fontSize(11).text("No PhD details.");
@@ -268,7 +274,10 @@ app.get("/degreePdf", async (req, res) => {
       const appCourses = courses.filter((c) => c.applicationId === app.id);
       if (appCourses.length) {
         appCourses.forEach((c) => {
-          doc.fontSize(11).text(`- ${c.courseClassName} | ${c.courseSubjectName} | ${c.courseCollegeName}`);
+          doc.fontSize(11).text(`- ${c.courseClassName} | ${c.courseSubjectName} | ${c.courseCollegeName} | Years of Exp: ${c.courseYearsOfExp}`);
+          doc.text(`From: ${c.courseFromDate} To: ${c.courseToDate || "Present"}`);
+          doc.text(`Department Type: ${c.courseDepartmentType} | Contract Type: ${c.courseTypeOfContract} | Last Salary: ${c.courseLastSalary}`);
+          doc.text(`Approved By University: ${c.courseApprovedByUni} | Letter No: ${c.courseLetterNumber} | Letter Date: ${c.courseLetterDate}`);
         });
       } else {
         doc.fontSize(11).text("No courses listed.");
@@ -280,7 +289,7 @@ app.get("/degreePdf", async (req, res) => {
       const appAwards = awards.filter((a) => a.applicationId === app.id);
       if (appAwards.length) {
         appAwards.forEach((a) => {
-          doc.fontSize(11).text(`- ${a.awardTitle} | ${a.awardOrganizationName}`);
+          doc.fontSize(11).text(`- ${a.awardTitle} | ${a.awardOrganizationName} | Award Nature: ${a.awardNature} | Recognition: ${a.awardOrganizationRecognition}`);
         });
       } else {
         doc.fontSize(11).text("No awards.");
@@ -292,7 +301,8 @@ app.get("/degreePdf", async (req, res) => {
       const appPubs = publications.filter((p) => p.applicationId === app.id);
       if (appPubs.length) {
         appPubs.forEach((p) => {
-          doc.fontSize(11).text(`- ${p.paperTitle} | ${p.journalName} | ${p.publicationYear}`);
+          doc.fontSize(11).text(`- Paper Title: ${p.paperTitle} | Journal Name: ${p.journalName} | ${p.publicationYear}`);
+          doc.text(`Scopus Publications: ${p.scopusPublications} | Scopus Id: ${p.scopusId} | Presented In Conference: ${p.presentedInConference ? "Yes" : "No"} | Approved Papers: ${p.approvedPapers}`);
         });
       } else {
         doc.fontSize(11).text("No publications.");
@@ -324,11 +334,6 @@ app.get("/degreePdf", async (req, res) => {
     res.status(500).send("Error exporting PDF");
   }
 });
-
-
-
-
-
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
