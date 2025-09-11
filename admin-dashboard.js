@@ -64,7 +64,7 @@ setInterval(checkInactivity, 60 * 1000); // check every minute
 
 async function handleExcelDownload(type) {
     try {
-        const res = await fetch(`http://localhost:3000/api/v1/export/${type}Excel` ,{
+        const res = await fetch(`https://mkm37ss1-3000.inc1.devtunnels.ms/api/v1/export/${type}Excel` ,{
               headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
@@ -90,7 +90,7 @@ async function handleExcelDownload(type) {
 // PDF download
 async function handlePdfDownload(type) {
     try {
-        const res = await fetch(`http://localhost:3000/api/v1/export/${type}Pdf` ,{
+        const res = await fetch(`https://mkm37ss1-3000.inc1.devtunnels.ms/api/v1/export/${type}Pdf` ,{
               headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }
@@ -102,7 +102,7 @@ async function handlePdfDownload(type) {
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'applicants.xlsx';
+        a.download = 'applicants.pdf';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
