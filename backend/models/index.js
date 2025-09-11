@@ -1,4 +1,4 @@
-// db.js
+
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 import ApplicationModel from './Application.js';
@@ -9,6 +9,7 @@ import PublicationModel from './Publication.js';
 import CourseModel from './Course.js';
 import PhdModel from './Phd.js';
 import AdditionalInfoModel from './AdditionalInfo.js';
+import userModel from '../models/userModel.js';
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ db.Publication = PublicationModel(sequelize);
 db.Course = CourseModel(sequelize);
 db.Phd = PhdModel(sequelize);
 db.AdditionalInfo = AdditionalInfoModel(sequelize);
+db.User = userModel(sequelize); 
 
 // Setup associations
 Object.values(db).forEach(model => {
