@@ -2,10 +2,11 @@ import express from "express";
 import mysql from "mysql2/promise";
 import ExcelJS from "exceljs";
 import dotenv from "dotenv";
+import path from "path";
 import PDFDocument from "pdfkit";
 import verifyToken from "../middleware/auth.js";
 dotenv.config();
-const exportRouter = express.Router();
+const exportJuniorRouter = express.Router();
 
 const dbConfig = {
   host: process.env.DB_HOST,
@@ -15,17 +16,18 @@ const dbConfig = {
 };
 
 
-exportRouter.get("/degreeExcel", verifyToken ,async (req, res) => {
+exportJuniorRouter.get("/juniorExcel", verifyToken ,async (req, res) => {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const [applicants] = await connection.execute("SELECT * FROM Applications WHERE form_type = 'degree_college'");
+    const [applicants] = await connection.execute("SELECT * FROM Applications WHERE form_type = 'junior_college'");
     console.log(applicants);
     const [qualifications] = await connection.execute(
       "SELECT * FROM Qualifications"
     );
     const [experience] = await connection.execute("SELECT * FROM Experiences");
     const [phds] = await connection.execute("SELECT * FROM Phds");
+    const [beds] = await connection.execute("SELECT * FROM BEds");
     const [courses] = await connection.execute("SELECT * FROM Courses");
     const [awards] = await connection.execute("SELECT * FROM Awards");
     const [publications] = await connection.execute(
@@ -127,10 +129,18 @@ exportRouter.get("/degreeExcel", verifyToken ,async (req, res) => {
       { header: "Status", key: "phdStatus" },
       { header: "University Name", key: "phdUniversity" },
       { header: "Phd Year", key: "phdYear" },
-      { header: "Net Year", key: "netYear" },
-      { header: "Set Year", key: "setYear" },
     ];
     phds.forEach((row) => phdSheet.addRow(row));
+
+    //beds
+    const bedSheet = workbook.addWorksheet("BEd");
+    bedSheet.columns = [
+      { header: "ID", key: "id" },
+      { header: "Applicant ID", key: "applicationId" },
+      { header: "University Name", key: "bedUniversity" },
+      { header: "BEd Year", key: "bedYear" },
+    ];
+    beds.forEach((row) => bedSheet.addRow(row));
 
     //courses
     const courseSheet = workbook.addWorksheet("Courses");
@@ -214,16 +224,17 @@ exportRouter.get("/degreeExcel", verifyToken ,async (req, res) => {
   }
 });
 
-exportRouter.get("/degreePdf", verifyToken ,async (req, res) => {
+exportJuniorRouter.get("/juniorPdf", verifyToken ,async (req, res) => {
   try {
     const connection = await mysql.createConnection(dbConfig);
 
-    const [applicants] = await connection.execute("SELECT * FROM Applications WHERE form_type = 'degree_college'");
+    const [applicants] = await connection.execute("SELECT * FROM Applications WHERE form_type = 'junior_college'");
     const [qualifications] = await connection.execute(
       "SELECT * FROM Qualifications"
     );
     const [experience] = await connection.execute("SELECT * FROM Experiences");
     const [phds] = await connection.execute("SELECT * FROM Phds");
+    const [beds] = await connection.execute("SELECT * FROM BEds");
     const [courses] = await connection.execute("SELECT * FROM Courses");
     const [awards] = await connection.execute("SELECT * FROM Awards");
     const [publications] = await connection.execute(
@@ -313,12 +324,23 @@ exportRouter.get("/degreePdf", verifyToken ,async (req, res) => {
           doc
             .fontSize(11)
             .text(`- ${p.phdStatus} | ${p.phdUniversity} | ${p.phdYear}`);
-          doc.text(
-            `NET Year: ${p.netYear || "na"} | SET Year: ${p.setYear || "na"}`
-          );
         });
       } else {
         doc.fontSize(11).text("No PhD details.");
+      }
+      doc.moveDown();
+
+      //bed
+       doc.fontSize(13).text("BEd Details:", { underline: true });
+      const appBEds = beds.filter((p) => p.applicationId === app.id);
+      if (appPhds.length) {
+        appBEds.forEach((p) => {
+          doc
+            .fontSize(11)
+            .text(`- ${p.bedUniversity} | ${p.bedYear}`);
+        });
+      } else {
+        doc.fontSize(11).text("No BEd details.");
       }
       doc.moveDown();
 
@@ -425,4 +447,4 @@ exportRouter.get("/degreePdf", verifyToken ,async (req, res) => {
   }
 });
 
-export default exportRouter;
+export default exportJuniorRouter;
