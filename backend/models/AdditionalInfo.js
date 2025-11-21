@@ -8,6 +8,12 @@ export default (sequelize) => {
     currentSalary: { type: DataTypes.TEXT ,allowNull: false },
     expectedSalary: { type: DataTypes.TEXT ,allowNull: false},
     extraCurricular: { type: DataTypes.TEXT ,allowNull: true},
+    motherTongue: { type: DataTypes.STRING, allowNull: true},
+    otherLang: { type: DataTypes.STRING, allowNull: true},
+    engTypingSpeed: { type: DataTypes.STRING, allowNull: true},
+    marTypingSpeed: { type: DataTypes.STRING, allowNull: true},
+    comment: { type: DataTypes.TEXT, allowNull: true},
+    joiningDate:{ type: DataTypes.STRING, allowNull: true},
     applicationId: { type: DataTypes.INTEGER, allowNull: false, unique: true },
   });
 

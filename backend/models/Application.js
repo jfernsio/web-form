@@ -3,7 +3,10 @@ import { DataTypes } from 'sequelize';
 export default (sequelize) => {
   const Application = sequelize.define('Application', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-
+    form_type: {
+      type: DataTypes.ENUM('degree_college', 'junior_college', 'non_teaching'),
+      allowNull: false
+    },
     postAppliedFor: { type: DataTypes.STRING },
     title: { type: DataTypes.STRING },
     firstName: { type: DataTypes.STRING },
@@ -36,11 +39,12 @@ export default (sequelize) => {
   Application.associate = (models) => {
     Application.hasMany(models.Qualification, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
     Application.hasMany(models.Experience, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
-    Application.hasMany(models.Award, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
+    Application.hasOne(models.Award, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
     Application.hasMany(models.Publication, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
-    Application.hasMany(models.Course, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
+    Application.hasOne(models.Course, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
     Application.hasMany(models.Phd, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
     Application.hasOne(models.AdditionalInfo, { foreignKey: 'applicationId', onDelete: 'CASCADE' });
+    Application.hasOne(models.BEd, { foreignKey: 'applicationId', onDelete: 'CASCADE'});
   };
 
   return Application;

@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // POST /api/apply
-applicationRouter.post('/', upload.single('resume'), async (req, res) => {
+applicationRouter.post('/degree-college', upload.single('resume'), async (req, res) => {
   const t = await db.sequelize.transaction();
   try {
     console.log("Request Body:", req.body); 
@@ -30,6 +30,7 @@ applicationRouter.post('/', upload.single('resume'), async (req, res) => {
 
     const app = await db.Application.create({
       postAppliedFor:postApplied,
+      form_type: 'degree_college',
       title,
       firstName,
       middleName,

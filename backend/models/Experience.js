@@ -10,6 +10,7 @@ export default (sequelize) => {
     toDate: { type: DataTypes.DATE, allowNull: false },
     currentlyWorking: { type: DataTypes.BOOLEAN, allowNull: false },
     currentSalary: { type: DataTypes.STRING, allowNull: true },
+    duration: { type:DataTypes.STRING, allowNull: true},
     applicationId: { type: DataTypes.INTEGER, allowNull: false },
   });
 

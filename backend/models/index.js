@@ -10,6 +10,7 @@ import CourseModel from './Course.js';
 import PhdModel from './Phd.js';
 import AdditionalInfoModel from './AdditionalInfo.js';
 import userModel from '../models/userModel.js';
+import BEd from './BEd.js';
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ db.Award = AwardModel(sequelize);
 db.Publication = PublicationModel(sequelize);
 db.Course = CourseModel(sequelize);
 db.Phd = PhdModel(sequelize);
+db.BEd = BEd(sequelize);
 db.AdditionalInfo = AdditionalInfoModel(sequelize);
 db.User = userModel(sequelize); 
 
