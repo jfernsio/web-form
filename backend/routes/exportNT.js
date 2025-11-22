@@ -151,15 +151,12 @@ nonTeachingRouter.get("/nonTeachingPdf", verifyToken ,async (req, res) => {
         });
       doc.fontSize(12).text(`Post Applied: ${app.postAppliedFor}`);
       doc.text(`Email: ${app.email} | Phone: ${app.mobile} `);
-      doc.text(`Alt Email: ${app.altEmail} | Alt Phone: ${app.altMobile} `);
       doc.text(
-        `DOB: ${app.dob} | Gender: ${app.gender} | Age: ${app.age} | Marital Status: ${app.maritalStatus}`
+        `DOB: ${app.dob} `
       );
       doc.text(
-        `Address: ${app.address} | State: ${app.state} | City: ${app.city} | Pincode: ${app.pinCode}`
+        `Address: ${app.address}`
       );
-      doc.text(`Caste: ${app.caste} | Aadhar: ${app.aadhar} | Pan: ${app.pan}`);
-      doc.text(`Institute applied to: ${app.institute}`);
       doc.moveDown();
 
       // Qualifications
@@ -170,13 +167,8 @@ nonTeachingRouter.get("/nonTeachingPdf", verifyToken ,async (req, res) => {
           doc
             .fontSize(11)
             .text(
-              `- ${q.degree} | ${q.degreeName} |${q.universityName} | ${q.yearOfPassing}`
+              `- ${q.degree} |${q.universityName} | ${q.yearOfPassing}`
             );
-          doc.text(
-            `Education Mode: ${q.educationMode} | Specialization: ${
-              q.specialization
-            } | Percentage: ${q.percentage || "-"} | CGPA: ${q.cgpa || "-"}`
-          );
         });
       } else {
         doc.fontSize(11).text("No qualifications listed.");
@@ -191,15 +183,9 @@ nonTeachingRouter.get("/nonTeachingPdf", verifyToken ,async (req, res) => {
           doc
             .fontSize(11)
             .text(
-              `- ${e.organization} | ${e.designation} | ${e.fromDate} - ${
-                e.toDate || "Present"
+              `- ${e.organization} | ${e.designation} | Duration: ${e.duration
               }`
             );
-          doc.text(
-            `Currently Working: ${
-              e.currentlyWorking ? "Yes" : "No"
-            } | Current Salary: ${e.currentSalary}`
-          );
         });
       } else {
         doc.fontSize(11).text("Fresher");
@@ -210,11 +196,15 @@ nonTeachingRouter.get("/nonTeachingPdf", verifyToken ,async (req, res) => {
       doc.fontSize(13).text("Additional Info:", { underline: true });
       const appInfo = additionalInfo.find((i) => i.applicationId === app.id);
       if (appInfo) {
-        doc.fontSize(11).text(`Reference: ${appInfo.referenceName}`);
-        doc.text(`Applied For: ${appInfo.appliedFor}`);
+        doc.fontSize(11)
+        doc.text(`Mother Tongue: ${appInfo.motherTongue || "-"}`);
+        doc.text(`Other Languages: ${appInfo.otherLang || "-"}`);
+        doc.text(`English Typing Speed: ${appInfo.engTypingSpeed || "-"}`);
+        doc.text(`Marathi Typing Speed: ${appInfo.marTypingSpeed || "-"}`);
+        doc.text(`Joining Date: ${appInfo.joiningDate || "-"}`);
         doc.text(`Current Salary: ${appInfo.currentSalary || "-"}`);
         doc.text(`Expected Salary: ${appInfo.expectedSalary || "-"}`);
-        doc.text(`Extra Curricular: ${appInfo.extraCurricular || "-"}`);
+        doc.text(`Comments: ${appInfo.comment || "-"}`);
       } else {
         doc.fontSize(11).text("No additional info.");
       }
