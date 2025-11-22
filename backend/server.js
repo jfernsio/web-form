@@ -9,13 +9,17 @@ import JuniorRouter from './routes/juniorApplication.js'
 import NonTeachingRoute from './routes/nonTeaching.js';
 import exportJuniorRouter from './routes/exportJunior.js';
 import nonTeachingRouter from './routes/exportNT.js';
-
+import path from 'path';
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
+app.get('/admin',(req,res) => res.sendFile(path.join(__dirname,'public/admin-login.html')));
 
 app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRouter);
