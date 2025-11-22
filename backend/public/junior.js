@@ -271,6 +271,30 @@ function updateRemoveButtons(type) {
   });
 }
 
+function updatePhdFields() {
+    const status = document.getElementById("phdStatus").value;
+    const university = document.getElementById("phdUniversity");
+    const year = document.getElementById("phdYear");
+
+    if (status === "completed") {
+      university.disabled = false;
+      year.disabled = false;
+    } else if (status === "pursuing" || status === "thesis-submitted") {
+      university.disabled = false;
+      year.disabled = true;
+      year.value = "";
+    } else if (status === "not-applicable") {
+      university.disabled = true;
+      university.value = "";
+      year.disabled = true;
+      year.value = "";
+    } else {
+      university.disabled = false;
+      year.disabled = false;
+    
+  };
+}
+
 // Resume Upload Handler
 function handleFileUpload(input) {
   const file = input.files[0];
