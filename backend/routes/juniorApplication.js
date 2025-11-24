@@ -24,7 +24,7 @@ JuniorRouter.post('/junior-college', upload.single('resume'), async (req, res) =
       city, pinCode, caste, aadhar, pan, declaration,
       qualifications, workExperiences, awardTitle, awardOrganizationName, awardNature, awardOrganizationRecognition, researchPapers,
       courseCollegeName,courseClassName, courseSubjectName,courseYearsOfExp,courseFromDate,courseToDate, courseDepartmentType, courseTypeOfContract, courseLastSalary, courseApprovedByUni,  courseLetterNumber,  courseLetterDate,
-      phdStatus, phdUniversity, phdYear, netStatus, netYear, bedUniversity, bedYear,setStatus, setYear, referenceName, appliedFor, currentSalary, expectedSalary, extraCurricular
+      phdStatus, phdUniversity, phdYear, bedUniversity, bedYear, referenceName, appliedFor, currentSalary, expectedSalary, extraCurricular
     } = req.body;
 
     const app = await db.Application.create({
@@ -41,7 +41,7 @@ JuniorRouter.post('/junior-college', upload.single('resume'), async (req, res) =
       altEmail,
       mobile,
       maritalStatus,
-      institute_applied:institute,
+      institute,
       altMobile,
       address,
       state,
@@ -114,8 +114,6 @@ JuniorRouter.post('/junior-college', upload.single('resume'), async (req, res) =
         phdStatus,
         phdUniversity,
         phdYear,
-        netYear: netStatus === 'yes' ? netYear : null,
-        setYear: setStatus === 'yes' ? setYear : null,
       }, { transaction: t });
     }
  if (bedUniversity && bedYear) {
