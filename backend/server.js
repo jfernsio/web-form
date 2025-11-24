@@ -13,7 +13,13 @@ import path from 'path';
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://web-form-g7a5.onrender.com"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,13 +38,13 @@ app.get('/hi', (req, res) => {
 });
 
 // Database synchronization
-db.sequelize.sync()
-  .then(() => {
-    console.log('Database synced successfully.');
-  })
-  .catch(err => {
-    console.error('Failed to sync database:', err.message);
-  });
+// db.sequelize.sync()
+//   .then(() => {
+//     console.log('Database synced successfully.');
+//   })
+//   .catch(err => {
+//     console.error('Failed to sync database:', err.message);
+//   });
 
 const PORT = process.env.PORT || 3000;
 db.sequelize.sync({ alter: true }).then(() => {

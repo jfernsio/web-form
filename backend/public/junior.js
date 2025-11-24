@@ -467,7 +467,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
   if (resume) fd.append('resume', resume);
 
   try {
-    const res = await fetch('http://localhost:5000/api/v1/apply/junior-college', { 
+    const res = await fetch('https://web-form-g7a5.onrender.com/api/v1/apply/junior-college', { 
       method: 'POST',
       body: fd
     });

@@ -193,7 +193,7 @@ const additionalInfo = {
 fd.append("additionalInfo", JSON.stringify(additionalInfo));
 fd.append("resume",file)
   try {
-    const response = await fetch("http://localhost:5000/api/v1/apply/non-teaching", {
+    const response = await fetch("https://web-form-g7a5.onrender.com/api/v1/apply/non-teaching", {
       method: "POST",
       body: fd,
     });
