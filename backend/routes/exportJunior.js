@@ -77,7 +77,7 @@ exportJuniorRouter.get("/juniorExcel", verifyToken ,async (req, res) => {
         const resumeCell = newRow.getCell("resumeFile"); // or newRow.getCell(4) if it's 4th column
         resumeCell.value = {
           text: "Download CV",
-          hyperlink: `http://localhost:5000/uploads/${row.resumeFile}`,
+          hyperlink: `https://web-form-g7a5.onrender.com/uploads/${row.resumeFile}`,
         };
         resumeCell.font = { color: { argb: "FF0000FF" }, underline: true };
       }
@@ -229,13 +229,19 @@ exportJuniorRouter.get("/juniorPdf", verifyToken ,async (req, res) => {
     const connection = await mysql.createConnection(dbConfig);
 
     const [applicants] = await connection.execute("SELECT * FROM Applications WHERE form_type = 'junior_college'");
+     console.log("applicants",applicants);
     const [qualifications] = await connection.execute(
-      "SELECT * FROM Qualifications"
+      "SELECT * FROM Qualifications WHERE applicationId IN (SELECT id FROM Applications WHERE form_type = 'junior_college')"
     );
-    const [experience] = await connection.execute("SELECT * FROM Experiences");
+    console.log("qualifications",qualifications);
+    const [experience] = await connection.execute(
+           "SELECT * FROM Experiences WHERE applicationId IN (SELECT id FROM Applications WHERE form_type = 'junior_college')"
+);
+    console.log("experience",experience);
     const [phds] = await connection.execute("SELECT * FROM Phds");
     const [beds] = await connection.execute("SELECT * FROM BEds");
     const [courses] = await connection.execute("SELECT * FROM Courses");
+    console.log("courses",courses)
     const [awards] = await connection.execute("SELECT * FROM Awards");
     const [publications] = await connection.execute(
       "SELECT * FROM Publications"
@@ -424,7 +430,7 @@ exportJuniorRouter.get("/juniorPdf", verifyToken ,async (req, res) => {
 
       doc.fontSize(12).text("Resume:", { underline: true });
       if (app.resumeFile) {
-        const resumeLink = `http://localhost:5000/uploads/${app.resumeFile}`;
+        const resumeLink = `https://web-form-g7a5.onrender.com/uploads/${app.resumeFile}`;
         doc.fillColor("blue").text("Download Resume", {
           link: resumeLink,
           underline: true,

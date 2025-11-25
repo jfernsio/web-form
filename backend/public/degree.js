@@ -601,7 +601,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
   }
 
   // --- Send data to backend ---
-  const backendUrl = 'http://localhost:5000/api/v1/apply/degree-college'; 
+  const backendUrl = 'https://web-form-g7a5.onrender.com/api/v1/apply/degree-college'; //'https://web-form-g7a5.onrender.com/api/v1/apply/degree-college'
 
   try {
     const response = await fetch(backendUrl, {

@@ -39,7 +39,7 @@ async function apiRequest(url, options = {}) {
 
 async function handleExcelDownload(type) {
   try {
-    const res = await apiRequest(`http://localhost:5000/api/v1/export/${type}Excel`);
+    const res = await apiRequest(`https://web-form-g7a5.onrender.com/api/v1/export/${type}Excel`);
     if (!res || !res.ok) throw new Error("Failed to download Excel");
 
     const blob = await res.blob();
@@ -59,7 +59,7 @@ async function handleExcelDownload(type) {
 
 async function handlePdfDownload(type) {
   try {
-    const res = await apiRequest(`http://localhost:5000/api/v1/export/${type}Pdf`);
+    const res = await apiRequest(`https://web-form-g7a5.onrender.com/api/v1/export/${type}Pdf`);
     if (!res || !res.ok) throw new Error("Failed to download PDF");
 
     const blob = await res.blob();

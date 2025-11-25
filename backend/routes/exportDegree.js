@@ -75,7 +75,7 @@ exportRouter.get("/degreeExcel", verifyToken ,async (req, res) => {
         const resumeCell = newRow.getCell("resumeFile"); // or newRow.getCell(4) if it's 4th column
         resumeCell.value = {
           text: "Download CV",
-          hyperlink: `http://localhost:5000/uploads/${row.resumeFile}`,
+          hyperlink: `https://web-form-g7a5.onrender.com/uploads/${row.resumeFile}`,
         };
         resumeCell.font = { color: { argb: "FF0000FF" }, underline: true };
       }
@@ -402,7 +402,7 @@ exportRouter.get("/degreePdf", verifyToken ,async (req, res) => {
 
       doc.fontSize(12).text("Resume:", { underline: true });
       if (app.resumeFile) {
-        const resumeLink = `http://localhost:5000/uploads/${app.resumeFile}`;
+        const resumeLink = `https://web-form-g7a5.onrender.com/uploads/${app.resumeFile}`;
         doc.fillColor("blue").text("Download Resume", {
           link: resumeLink,
           underline: true,

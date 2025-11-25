@@ -368,6 +368,9 @@ document.getElementById('applicationForm').addEventListener('submit', async func
   fd.append('middleName', document.getElementById('middleName').value);
   fd.append('lastName', document.getElementById('lastName').value);
   fd.append('dob', document.getElementById('dob').value);
+  fd.append('age', document.getElementById('age').value);
+  fd.append('altEmail', document.getElementById('altEmail').value);
+  fd.append('altMobile', document.getElementById('altMobile').value);
   fd.append('gender', document.getElementById('gender').value);
   fd.append('maritalStatus', document.getElementById('maritalStatus').value);
   fd.append('email', document.getElementById('email').value);
@@ -418,28 +421,53 @@ document.getElementById('applicationForm').addEventListener('submit', async func
       current: item.querySelector('.experience-current-role').checked
     });
   });
-  fd.append('experiences', JSON.stringify(exps));
-
+  fd.append('workExperiences', JSON.stringify(exps));
+  
+  //Research Papers
+  const papers = [];
+  document.querySelectorAll('.research-paper-item').forEach(item => {
+    papers.push({
+      scopusPublications: item.querySelector('.scopus-publications').value,
+      scopusId: item.querySelector('.scopus-id').value,
+      conferencePresented: item.querySelector('.conference-select').value,
+      paperTitle: item.querySelector('.paper-title').value,
+      journalName: item.querySelector('.journal-name').value,
+      publicationYear: item.querySelector('.publication-year').value,
+      approvedPapers: item.querySelector('.approved-papers').value
+    });
+  });
+  fd.append('researchPapers', JSON.stringify(papers));
   // Courses Taught
-  fd.append('collegeName', document.getElementById('collegeName').value);
-  fd.append('className', document.getElementById('className').value);
-  fd.append('subjectName', document.getElementById('subjectName').value);
-  fd.append('yearsOfExp', document.getElementById('yearsOfExp').value);
-  fd.append('departmentType', document.getElementById('departmentType').value);
-  fd.append('typeOfContract', document.getElementById('typeOfContract').value);
-  fd.append('lastSalary', document.getElementById('lastSalary').value);
-  fd.append('approvedByUni', document.getElementById('approvedByUni').value);
+  fd.append('courseCollegeName', document.getElementById('courseCollegeName').value);
+  fd.append('courseClassName', document.getElementById('courseClassName').value);
+  fd.append('courseSubjectName', document.getElementById('courseSubjectName').value);
+  fd.append('courseYearsOfExp', document.getElementById('courseYearsOfExp').value);
+  fd.append('courseFromDate', document.getElementById('courseFromDate').value);
+  fd.append('courseToDate', document.getElementById('courseToDate').value);
+  fd.append('courseDepartmentType', document.getElementById('courseDepartmentType').value);
+  fd.append('courseTypeOfContract', document.getElementById('courseTypeOfContract').value);
+  fd.append('courseLastSalary', document.getElementById('courseLastSalary').value);
+  fd.append('courseApprovedByUni', document.getElementById('courseApprovedByUni').value);
+  fd.append('courseLetterNumber', document.getElementById('courseLetterNumber').value);
+  fd.append('courseLetterDate', document.getElementById('courseLetterDate').value);
+  // Awards
+  fd.append('awardTitle', document.getElementById('awardTitle').value);
+  fd.append('awardOrganizationName', document.getElementById('awardOrganizationName').value);
+  fd.append('awardNature', document.getElementById('awardNature').value); // Corrected ID
+  fd.append('awardOrganizationRecognition', document.getElementById('awardOrganizationRecognition').value);
 
-  // Salary
+  // Additional Information 
+  fd.append('referenceName', document.getElementById('referenceName').value);
+  fd.append('appliedFor', document.getElementById('appliedFor').value);
   fd.append('currentSalary', document.getElementById('currentSalary').value);
   fd.append('expectedSalary', document.getElementById('expectedSalary').value);
-
+  fd.append('extraCurricular', document.getElementById('extraCurricular').value);
   // Resume
   const resume = document.getElementById('resumeUpload').files[0];
   if (resume) fd.append('resume', resume);
 
   try {
-    const res = await fetch('http://localhost:5000/api/v1/apply/junior-college', {  // Change this!
+    const res = await fetch('https://web-form-g7a5.onrender.com/api/v1/apply/junior-college', { 
       method: 'POST',
       body: fd
     });
