@@ -194,7 +194,10 @@
                     <input
                       type="tel"
                       id="aadhar"
-                      placeholder="Enter Aadhar No "
+                      placeholder="1234 5678 9000"
+                      pattern="[0-9]{12}"
+                      maxlength="12"
+                      inputmode="numeric"
                       required
                     />
                   </div>
@@ -203,7 +206,9 @@
                     <input
                       type="text"
                       id="pan"
-                      placeholder="Enter PAn NO"
+                      placeholder="ABCDE1234F"
+                      pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                      maxlength="10"
                       required
                     />
                   </div>
@@ -257,7 +262,10 @@
                         <input
                           type="tel"
                           id="mobile"
-                          placeholder="Mobile No"
+                          placeholder="1234567"
+                          pattern="[0-9]{10}"
+                          maxlength="10"
+                          inputmode="numeric"
                           required
                         />
                       </div>
@@ -266,7 +274,10 @@
                         <input
                           type="tel"
                           id="altMobile"
-                          placeholder="Mobile No"
+                          placeholder="1234567"
+                          pattern="[0-9]{10}"
+                          maxlength="10"
+                          inputmode="numeric"
                         />
                       </div>
                     </div>
@@ -619,7 +630,10 @@
                         <input
                           type="text"
                           class="experience-salary"
-                          placeholder="Enter Current Salary"
+                          placeholder="1234567"
+                          pattern="[0-9]{1,7}"
+                          maxlength="7"
+                          inputmode="numeric"
                         />
                       </div>
                       <div class="form-field checkbox-field">
@@ -689,7 +703,7 @@
                   <div class="form-field">
                     <label>Years of Experience </label>
                     <input
-                      type="tel"
+                      type="number"
                       id="courseYearsOfExp"
                       placeholder="Enter Years of Experience"
                     />
@@ -904,7 +918,10 @@
                     <input
                       type="text"
                       id="currentSalary"
-                      placeholder="Enter Current Salary"
+                      placeholder="1234567"
+                      pattern="[0-9]{1,7}"
+                      maxlength="7"
+                      inputmode="numeric"
                     />
                   </div>
                   <div class="form-field">
@@ -914,7 +931,10 @@
                     <input
                       type="text"
                       id="expectedSalary"
-                      placeholder="Enter Expected Salary"
+                      placeholder="1234567"
+                      pattern="[0-9]{1,7}"
+                      maxlength="7"
+                      inputmode="numeric"
                     />
                   </div>
                   <div class="form-field">

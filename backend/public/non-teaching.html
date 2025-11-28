@@ -111,7 +111,10 @@
                     <input
                       type="tel"
                       id="mobile"
-                      placeholder="Mobile Number"
+                      placeholder="1234567890"
+                      pattern="[0-9]{10}"
+                      maxlength="10"
+                      inputmode="numeric"
                       required
                     />
                   </div>
@@ -251,7 +254,11 @@
                     <input
                       type="text"
                       id="expectedSalary"
-                      placeholder="Expected Salary"
+                      name="expectedSalary"
+                      placeholder="1234567"
+                      pattern="[0-9]{1,7}"
+                      maxlength="7"
+                      inputmode="numeric"
                     />
                   </div>
                   <div class="form-field">
@@ -259,7 +266,10 @@
                     <input
                       type="text"
                       id="currentSalary"
-                      placeholder="Current Salary"
+                      placeholder="1234567"
+                      pattern="[0-9]{1,7}"
+                      maxlength="7"
+                      inputmode="numeric"
                     />
                   </div>
                 </div>

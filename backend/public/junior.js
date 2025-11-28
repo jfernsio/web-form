@@ -175,7 +175,9 @@ function addExperience() {
     <div class="form-row">
       <div class="form-field">
         <label>Current Salary (Gross per month)</label>
-        <input type="text" class="experience-salary" />
+        <input type="text" class="experience-salary" pattern="[0-9]{1,7}"
+                      maxlength="7"
+                      inputmode="numeric"/>
       </div>
       <div class="form-field checkbox-field">
         <input type="checkbox" class="experience-current-role" />
@@ -467,7 +469,7 @@ document.getElementById('applicationForm').addEventListener('submit', async func
   if (resume) fd.append('resume', resume);
 
   try {
-    const res = await fetch('https://web-form-g7a5.onrender.com/api/v1/apply/junior-college', { 
+    const res = await fetch('https://3cww7b0d-5000.inc1.devtunnels.ms/api/v1/apply/junior-college', { 
       method: 'POST',
       body: fd
     });

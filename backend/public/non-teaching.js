@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="form-field">
         <label>Year<span class="required">*</span></label>
-        <input type="number" id="year-of-passing" placeholder="Year" required min="1900" max="2099" />
+        <input type="number" id="year-of-passing" placeholder="Year" required min="1980" max="2050" />
       </div>
     `;
     document.getElementById("qualificationsList").appendChild(container);
@@ -193,7 +193,7 @@ const additionalInfo = {
 fd.append("additionalInfo", JSON.stringify(additionalInfo));
 fd.append("resume",file)
   try {
-    const response = await fetch("https://web-form-g7a5.onrender.com/api/v1/apply/non-teaching", {
+    const response = await fetch("https://3cww7b0d-5000.inc1.devtunnels.ms/api/v1/apply/non-teaching", {
       method: "POST",
       body: fd,
     });
